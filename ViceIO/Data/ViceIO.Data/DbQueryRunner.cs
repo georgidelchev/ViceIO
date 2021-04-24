@@ -1,12 +1,11 @@
-﻿namespace ViceIO.Data
+﻿using System;
+using System.Threading.Tasks;
+
+using Microsoft.EntityFrameworkCore;
+using ViceIO.Data.Common;
+
+namespace ViceIO.Data
 {
-    using System;
-    using System.Threading.Tasks;
-
-    using ViceIO.Data.Common;
-
-    using Microsoft.EntityFrameworkCore;
-
     public class DbQueryRunner : IDbQueryRunner
     {
         public DbQueryRunner(ApplicationDbContext context)
@@ -24,6 +23,7 @@
         public void Dispose()
         {
             this.Dispose(true);
+
             GC.SuppressFinalize(this);
         }
 

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ViceIO.Data;
 
 namespace ViceIO.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210424174847_InitialCreateDatabase")]
+    partial class InitialCreateDatabase
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -291,9 +293,6 @@ namespace ViceIO.Data.Migrations
                     b.Property<string>("AddedByUserId1")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
@@ -318,8 +317,6 @@ namespace ViceIO.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AddedByUserId1");
-
-                    b.HasIndex("CategoryId");
 
                     b.HasIndex("IsDeleted");
 
@@ -495,15 +492,7 @@ namespace ViceIO.Data.Migrations
                         .WithMany("Picture")
                         .HasForeignKey("AddedByUserId1");
 
-                    b.HasOne("ViceIO.Data.Models.Category", "Category")
-                        .WithMany()
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.Navigation("AddedByUser");
-
-                    b.Navigation("Category");
                 });
 
             modelBuilder.Entity("ViceIO.Data.Models.PictureVote", b =>

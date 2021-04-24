@@ -1,27 +1,25 @@
-﻿namespace ViceIO.Web
+﻿using System.Reflection;
+
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using ViceIO.Data;
+using ViceIO.Data.Common;
+using ViceIO.Data.Common.Repositories;
+using ViceIO.Data.Models;
+using ViceIO.Data.Repositories;
+using ViceIO.Data.Seeding;
+using ViceIO.Services.Mapping;
+using ViceIO.Services.Messaging;
+using ViceIO.Web.ViewModels;
+
+namespace ViceIO.Web
 {
-    using System.Reflection;
-
-    using ViceIO.Data;
-    using ViceIO.Data.Common;
-    using ViceIO.Data.Common.Repositories;
-    using ViceIO.Data.Models;
-    using ViceIO.Data.Repositories;
-    using ViceIO.Data.Seeding;
-    using ViceIO.Services.Data;
-    using ViceIO.Services.Mapping;
-    using ViceIO.Services.Messaging;
-    using ViceIO.Web.ViewModels;
-
-    using Microsoft.AspNetCore.Builder;
-    using Microsoft.AspNetCore.Hosting;
-    using Microsoft.AspNetCore.Http;
-    using Microsoft.AspNetCore.Mvc;
-    using Microsoft.EntityFrameworkCore;
-    using Microsoft.Extensions.Configuration;
-    using Microsoft.Extensions.DependencyInjection;
-    using Microsoft.Extensions.Hosting;
-
     public class Startup
     {
         private readonly IConfiguration configuration;
@@ -64,7 +62,6 @@
 
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
-            services.AddTransient<ISettingsService, SettingsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

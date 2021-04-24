@@ -1,7 +1,7 @@
-﻿namespace ViceIO.Web.Controllers
-{
-    using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
+namespace ViceIO.Web.Controllers
+{
     public class BaseController : Controller
     {
     }

@@ -1,12 +1,10 @@
-﻿// ReSharper disable VirtualMemberCallInConstructor
+﻿using System;
+
+using Microsoft.AspNetCore.Identity;
+using ViceIO.Data.Common.Models;
+
 namespace ViceIO.Data.Models
 {
-    using System;
-
-    using ViceIO.Data.Common.Models;
-
-    using Microsoft.AspNetCore.Identity;
-
     public class ApplicationRole : IdentityRole, IAuditInfo, IDeletableEntity
     {
         public ApplicationRole()

@@ -1,8 +1,8 @@
-﻿namespace ViceIO.Web
-{
-    using Microsoft.AspNetCore.Hosting;
-    using Microsoft.Extensions.Hosting;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
 
+namespace ViceIO.Web
+{
     public static class Program
     {
         public static void Main(string[] args)

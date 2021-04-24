@@ -1,11 +1,10 @@
-﻿namespace ViceIO.Web.Controllers
+﻿using System.Diagnostics;
+
+using Microsoft.AspNetCore.Mvc;
+using ViceIO.Web.ViewModels;
+
+namespace ViceIO.Web.Controllers
 {
-    using System.Diagnostics;
-
-    using ViceIO.Web.ViewModels;
-
-    using Microsoft.AspNetCore.Mvc;
-
     public class HomeController : BaseController
     {
         public IActionResult Index()

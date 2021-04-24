@@ -1,8 +1,8 @@
-﻿namespace ViceIO.Services.Messaging
-{
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
+namespace ViceIO.Services.Messaging
+{
     public class NullMessageSender : IEmailSender
     {
         public Task SendEmailAsync(

@@ -1,7 +1,7 @@
-﻿namespace ViceIO.Data
-{
-    using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 
+namespace ViceIO.Data
+{
     public static class IdentityOptionsProvider
     {
         public static void GetIdentityOptions(IdentityOptions options)

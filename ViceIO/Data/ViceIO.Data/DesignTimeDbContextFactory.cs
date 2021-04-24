@@ -1,11 +1,11 @@
-﻿namespace ViceIO.Data
+﻿using System.IO;
+
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
+using Microsoft.Extensions.Configuration;
+
+namespace ViceIO.Data
 {
-    using System.IO;
-
-    using Microsoft.EntityFrameworkCore;
-    using Microsoft.EntityFrameworkCore.Design;
-    using Microsoft.Extensions.Configuration;
-
     public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<ApplicationDbContext>
     {
         public ApplicationDbContext CreateDbContext(string[] args)
@@ -16,7 +16,9 @@
                 .Build();
 
             var builder = new DbContextOptionsBuilder<ApplicationDbContext>();
+
             var connectionString = configuration.GetConnectionString("DefaultConnection");
+
             builder.UseSqlServer(connectionString);
 
             return new ApplicationDbContext(builder.Options);
