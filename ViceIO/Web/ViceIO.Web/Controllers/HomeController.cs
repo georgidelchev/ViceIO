@@ -5,7 +5,7 @@ using ViceIO.Web.ViewModels;
 
 namespace ViceIO.Web.Controllers
 {
-    public class HomeController : BaseController
+    public class HomeController : Controller
     {
         public IActionResult Index()
         {

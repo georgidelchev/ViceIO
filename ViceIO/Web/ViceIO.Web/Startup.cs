@@ -14,6 +14,7 @@ using ViceIO.Data.Common.Repositories;
 using ViceIO.Data.Models;
 using ViceIO.Data.Repositories;
 using ViceIO.Data.Seeding;
+using ViceIO.Services;
 using ViceIO.Services.Mapping;
 using ViceIO.Services.Messaging;
 using ViceIO.Web.ViewModels;
@@ -62,6 +63,8 @@ namespace ViceIO.Web
 
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
+
+            services.AddTransient<IVicesService, VicesService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
