@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Security.Claims;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using ViceIO.Services;
 using ViceIO.Web.ViewModels.Vices;
 
@@ -7,12 +9,15 @@ namespace ViceIO.Web.Controllers
     public class VicesController : Controller
     {
         private readonly IVicesService vicesService;
+        private readonly IVicesCategoriesService vicesCategoriesService;
 
-        public VicesController(IVicesService vicesService)
+        public VicesController(IVicesService vicesService, IVicesCategoriesService vicesCategoriesService)
         {
             this.vicesService = vicesService;
+            this.vicesCategoriesService = vicesCategoriesService;
         }
 
+        [HttpGet]
         public IActionResult All()
         {
             var viewModel = new VicesListViewModel()
@@ -23,20 +28,38 @@ namespace ViceIO.Web.Controllers
             return this.View(viewModel);
         }
 
+        [HttpGet]
         public IActionResult Create()
         {
-            return this.View();
+            var viewModel = new CreateViceInputModel
+            {
+                Categories = this.vicesCategoriesService.GetAll(),
+            };
+
+            return this.View(viewModel);
         }
 
         [HttpPost]
-        public IActionResult Create(CreateViceInputModel input)
+        public async Task<IActionResult> Create(CreateViceInputModel input)
         {
-            return this.Redirect("Vices/All");
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(input);
+            }
+
+            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            await this.vicesService.CreateAsync(input, userId);
+
+            return this.Redirect("/Vices/All");
         }
 
+        [HttpGet]
         public IActionResult Random()
         {
-            return this.View();
+            var viewModel = this.vicesService.GetRandom();
+
+            return this.View(viewModel);
         }
     }
 }

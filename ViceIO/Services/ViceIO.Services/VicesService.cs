@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -11,15 +12,25 @@ namespace ViceIO.Services
     public class VicesService : IVicesService
     {
         private readonly IDeletableEntityRepository<Vice> vicesRepository;
+        private readonly Random random;
 
-        public VicesService(IDeletableEntityRepository<Vice> vicesRepository)
+        public VicesService(IDeletableEntityRepository<Vice> vicesRepository, Random random)
         {
             this.vicesRepository = vicesRepository;
+            this.random = random;
         }
 
-        public Task CreateAsync(CreateViceInputModel input)
+        public async Task CreateAsync(CreateViceInputModel input, string userId)
         {
-            throw new System.NotImplementedException();
+            var vice = new Vice()
+            {
+                AddedByUserId = userId,
+                CategoryId = input.CategoryId,
+                Content = input.Content,
+            };
+
+            await this.vicesRepository.AddAsync(vice);
+            await this.vicesRepository.SaveChangesAsync();
         }
 
         public IEnumerable<GetAllVicesViewModel> GetAll()
@@ -41,7 +52,21 @@ namespace ViceIO.Services
 
         public GetRandomViceViewModel GetRandom()
         {
-            throw new System.NotImplementedException();
+            var randomVice = this.vicesRepository
+                .All()
+                .OrderBy(v => Guid.NewGuid())
+                .Skip(this.random.Next(1, this.vicesRepository.All().Count()))
+                .Select(v => new GetRandomViceViewModel()
+                {
+                    AddedByUserEmail = v.AddedByUser.Email,
+                    CategoryName = v.Category.Name,
+                    Content = v.Content,
+                    CreatedOn = v.CreatedOn,
+                    Id = v.Id,
+                })
+                .FirstOrDefault();
+
+            return randomVice;
         }
 
         public int GetCount()

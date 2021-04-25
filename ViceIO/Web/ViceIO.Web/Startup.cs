@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -65,6 +66,10 @@ namespace ViceIO.Web
             services.AddTransient<IEmailSender, NullMessageSender>();
 
             services.AddTransient<IVicesService, VicesService>();
+
+            services.AddTransient<IVicesCategoriesService, VicesCategoriesService>();
+
+            services.AddTransient<Random>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

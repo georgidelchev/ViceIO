@@ -7,7 +7,7 @@ namespace ViceIO.Services
 {
     public interface IVicesService
     {
-        Task CreateAsync(CreateViceInputModel input);
+        Task CreateAsync(CreateViceInputModel input, string userId);
 
         IEnumerable<GetAllVicesViewModel> GetAll();
 

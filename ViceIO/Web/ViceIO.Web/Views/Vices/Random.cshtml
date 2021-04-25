@@ -1,1 +1,19 @@
-﻿<h1>Random Vice...</h1>
+﻿@model ViceIO.Web.ViewModels.Vices.GetRandomViceViewModel
+
+<h1>Random Vice...</h1>
+<a asp-controller="Vices" asp-action="Random"><button class="btn btn-danger">Random</button></a>
+
+<div class="card col-md-4">
+    <h5 class="card-title text-center">
+        @*<a asp-action="ById" asp-route-id="@recipe.Id">
+                @recipe.ShortName@if (recipe.Name.Length > 20)
+                                 {<text>...</text>}
+            </a>*@
+    </h5>
+    <div class="card-body">
+        <p class="card-text text-center">@Model.Content</p>
+        <p class="card-text text-center">@Model.CategoryName</p>
+        <p class="card-text text-center">@Model.AddedByUserEmail</p>
+        <p class="card-text text-center"><small class="text-muted">@Model.CreatedOnAsString</small></p>
+    </div>
+</div>
