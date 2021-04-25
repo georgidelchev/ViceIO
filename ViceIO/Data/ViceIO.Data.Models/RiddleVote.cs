@@ -4,7 +4,7 @@ using ViceIO.Data.Common.Models;
 
 namespace ViceIO.Data.Models
 {
-    public class PictureVote : BaseModel<int>
+    public class RiddleVote : BaseModel<int>
     {
         [Required]
         public int PictureId { get; set; }

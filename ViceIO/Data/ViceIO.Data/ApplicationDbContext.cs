@@ -23,13 +23,21 @@ namespace ViceIO.Data
         {
         }
 
-        public DbSet<Category> Categories { get; set; }
-
         public DbSet<Picture> Pictures { get; set; }
+
+        public DbSet<PictureCategory> PictureCategories { get; set; }
 
         public DbSet<PictureVote> PictureVotes { get; set; }
 
+        public DbSet<Riddle> Riddles { get; set; }
+
+        public DbSet<RiddleCategory> RiddleCategories { get; set; }
+
+        public DbSet<RiddleVote> RiddleVotes { get; set; }
+
         public DbSet<Vice> Vices { get; set; }
+
+        public DbSet<ViceCategory> ViceCategories { get; set; }
 
         public DbSet<ViceVote> ViceVotes { get; set; }
 

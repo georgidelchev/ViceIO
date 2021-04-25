@@ -11,13 +11,15 @@ namespace ViceIO.Data.Models
         [MaxLength(2000)]
         public string Content { get; set; }
 
+        public string SourceUrl { get; set; }
+
         [Required]
         public int CategoryId { get; set; }
 
-        public virtual Category Category { get; set; }
+        public virtual ViceCategory Category { get; set; }
 
         [Required]
-        public int AddedByUserId { get; set; }
+        public string AddedByUserId { get; set; }
 
         public virtual ApplicationUser AddedByUser { get; set; }
 

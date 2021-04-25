@@ -4,7 +4,7 @@ using ViceIO.Data.Common.Models;
 
 namespace ViceIO.Data.Models
 {
-    public class Category : BaseDeletableModel<int>
+    public class RiddleCategory : BaseDeletableModel<int>
     {
         [Required]
         [MaxLength(25)]

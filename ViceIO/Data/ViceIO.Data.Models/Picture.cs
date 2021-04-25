@@ -15,13 +15,15 @@ namespace ViceIO.Data.Models
         [Url]
         public string Url { get; set; }
 
+        public string SourceUrl { get; set; }
+
         [Required]
         public int CategoryId { get; set; }
 
-        public Category Category { get; set; }
+        public PictureCategory Category { get; set; }
 
         [Required]
-        public int AddedByUserId { get; set; }
+        public string AddedByUserId { get; set; }
 
         public virtual ApplicationUser AddedByUser { get; set; }
 
