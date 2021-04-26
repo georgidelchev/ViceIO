@@ -1,0 +1,23 @@
+﻿@using System.Security.Claims
+@model ViceIO.Web.ViewModels.Pictures.PicturesListViewModel
+
+@{
+    this.ViewData["Name"] = "All Pictures";
+}
+
+<h1>All Pictures...</h1>
+
+@foreach (var picture in this.Model.Pictures)
+{
+    <hr />
+    <div class="card">
+        <div class="card-body">
+            <h6 class="card-subtitle mb-2 text-muted">Category: @picture.CategoryName</h6>
+            <p class="card-text">@picture.Name</p>
+            <p class="card-text">@picture.Url</p>
+            <p class="card-text">@picture.SourceUrl</p>
+            <p class="card-text">@picture.CreatedOnAsString</p>
+            <a asp-controller="Users" asp-action="Profile" asp-route-id="@picture.AddedByUserId" class="card-link">@picture.AddedByUserEmail</a>
+        </div>
+    </div>
+}
