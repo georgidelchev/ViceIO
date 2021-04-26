@@ -44,6 +44,7 @@ namespace ViceIO.Services
                     Content = v.Content,
                     CreatedOn = v.CreatedOn,
                     Id = v.Id,
+                    AddedByUserId = v.AddedByUserId,
                 })
                 .ToList();
 
@@ -63,6 +64,7 @@ namespace ViceIO.Services
                     Content = v.Content,
                     CreatedOn = v.CreatedOn,
                     Id = v.Id,
+                    AddedByUserId = v.AddedByUserId,
                 })
                 .FirstOrDefault();
 

@@ -16,5 +16,7 @@ namespace ViceIO.Web.ViewModels.Vices
 
         public string CreatedOnAsString
             => this.CreatedOn.ToShortDateString();
+
+        public string AddedByUserId { get; set; }
     }
 }

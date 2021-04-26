@@ -1,34 +1,21 @@
-﻿@model ViceIO.Web.ViewModels.Vices.VicesListViewModel
+﻿@using System.Security.Claims
+@model ViceIO.Web.ViewModels.Vices.VicesListViewModel
 
 @{
     this.ViewData["Name"] = "All Vices";
 }
 
 <h1>All Vices...</h1>
+
 @foreach (var vice in this.Model.Vices)
 {
-    <!--<div class="card container col-sm-3">
-        <h5 class="card-title text-center">-->
-    @*<a asp-action="ById" asp-route-id="@recipe.Id">
-            @recipe.ShortName@if (recipe.Name.Length > 20)
-                             {<text>...</text>}
-        </a>*@
-    <!--</h5>
-    <div class="card-body">
-        <p class="card-text text-center">@vice.Content</p>
-        <p class="card-text text-center">@vice.CategoryName</p>
-        <p class="card-text text-center">@vice.AddedByUserEmail</p>
-        <p class="card-text text-center"><small class="text-muted">@vice.CreatedOnAsString</small></p>
-    </div>
-    </div>-->
     <hr />
-
     <div class="card">
         <div class="card-body">
             <h6 class="card-subtitle mb-2 text-muted">Category: @vice.CategoryName</h6>
             <p class="card-text">@vice.Content</p>
             <p class="card-text">@vice.CreatedOnAsString</p>
-            <a href="#" class="card-link">@vice.AddedByUserEmail</a>
+            <a asp-controller="Users" asp-action="Profile" asp-route-id="@vice.AddedByUserId" class="card-link">@vice.AddedByUserEmail</a>
         </div>
     </div>
 }
