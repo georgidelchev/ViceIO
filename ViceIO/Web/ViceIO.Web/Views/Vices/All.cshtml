@@ -14,24 +14,21 @@
                              {<text>...</text>}
         </a>*@
     <!--</h5>
-        <div class="card-body">
-            <p class="card-text text-center">@vice.Content</p>
-            <p class="card-text text-center">@vice.CategoryName</p>
-            <p class="card-text text-center">@vice.AddedByUserEmail</p>
-            <p class="card-text text-center"><small class="text-muted">@vice.CreatedOnAsString</small></p>
-        </div>
+    <div class="card-body">
+        <p class="card-text text-center">@vice.Content</p>
+        <p class="card-text text-center">@vice.CategoryName</p>
+        <p class="card-text text-center">@vice.AddedByUserEmail</p>
+        <p class="card-text text-center"><small class="text-muted">@vice.CreatedOnAsString</small></p>
+    </div>
     </div>-->
+    <hr />
 
-    <article class="jokes-category">
-        <h2>
-            Created On: @vice.CreatedOnAsString
-            <span class="thecategory">
-                <br />Category:
-                <a href="/vcat-1">@vice.CategoryName</a>
-            </span><br />
-            Uploaded By: @vice.AddedByUserEmail
-        </h2>
-        <p class="joke_text" style="word-break: break-all;">@vice.Content</p>
-        
-    </article>
-    }
+    <div class="card">
+        <div class="card-body">
+            <h6 class="card-subtitle mb-2 text-muted">Category: @vice.CategoryName</h6>
+            <p class="card-text">@vice.Content</p>
+            <p class="card-text">@vice.CreatedOnAsString</p>
+            <a href="#" class="card-link">@vice.AddedByUserEmail</a>
+        </div>
+    </div>
+}
