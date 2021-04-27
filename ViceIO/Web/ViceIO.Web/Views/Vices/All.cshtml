@@ -1,21 +1,71 @@
-﻿@using System.Security.Claims
-@model ViceIO.Web.ViewModels.Vices.VicesListViewModel
+﻿@model ViceIO.Web.ViewModels.Vices.VicesListViewModel
 
 @{
     this.ViewData["Name"] = "All Vices";
 }
 
 <h1>All Vices...</h1>
-
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>
+<script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js" asp-append-version="true"></script>
 @foreach (var vice in this.Model.Vices)
 {
     <hr />
     <div class="card">
         <div class="card-body">
             <h6 class="card-subtitle mb-2 text-muted">Category: @vice.CategoryName</h6>
-            <p class="card-text">@vice.Content</p>
+            <p>
+                @vice.ShortName@if (vice.Content.Length > 10)
+                {<text>...</text><a asp-action="ById" asp-route-id="@vice.Id"><text> read more</text></a>}
+            </p>
             <p class="card-text">@vice.CreatedOnAsString</p>
             <a asp-controller="Users" asp-action="Profile" asp-route-id="@vice.AddedByUserId" class="card-link">@vice.AddedByUserEmail</a>
+            <br />
+            <br />
+            <span class="star-fill" style="cursor: pointer;" id="@vice.Id" data-vote="1"><i class="fas fa-star"></i></span>
+            <span class="star-fill" style="cursor: pointer;" id="@vice.Id" data-vote="2"><i class="fas fa-star"></i></span>
+            <span class="star-fill" style="cursor: pointer;" id="@vice.Id" data-vote="3"><i class="fas fa-star"></i></span>
+            <span class="star-fill" style="cursor: pointer;" id="@vice.Id" data-vote="4"><i class="fas fa-star"></i></span>
+            <span class="star-fill" style="cursor: pointer;" id="@vice.Id" data-vote="5"><i class="fas fa-star"></i></span>
+            <span>
+                <span id="averageVoteValue">
+                    @if (vice.AverageVote % 1 == 0)
+                    {
+                        @vice.AverageVote
+                    }
+                    else
+                    {
+                        @vice.AverageVote.ToString("0.0")
+                    }
+                </span>
+                <span> / 5</span>
+            </span>
         </div>
     </div>
 }
+<form method="post" id="antiForgeryForm"></form>
+<script>
+    $("span[data-vote]").each(function (el) {
+        $(this).click(function () {
+            var value = $(this).attr("data-vote");
+            console.log(value);
+            var viceId = $(this).attr("id");
+            console.log(viceId);
+            var antiForgeryToken = $('#antiForgeryForm input[name=__RequestVerificationToken]').val();
+            var data = { viceId: viceId, value: value };
+            $.ajax({
+                type: "POST",
+                url: "/api/ViceVotes",
+                data: JSON.stringify(data),
+                headers: {
+                    'X-CSRF-TOKEN': antiForgeryToken
+                },
+                success: function (data) {
+                    $('#averageVoteValue').html(data.averageVote % 1 == 0 ? data.averageVote : data.averageVote.toFixed(1));
+                },
+                contentType: 'application/json',
+            });
+        });
+    });
+</script>

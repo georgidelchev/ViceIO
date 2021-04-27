@@ -1,4 +1,8 @@
 ﻿using System;
+using System.Linq;
+using AutoMapper;
+using ViceIO.Data.Models;
+using ViceIO.Services.Mapping;
 
 namespace ViceIO.Web.ViewModels.Vices
 {

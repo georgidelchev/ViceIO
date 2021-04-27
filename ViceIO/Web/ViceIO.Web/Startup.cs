@@ -54,7 +54,10 @@ namespace ViceIO.Web
                     }).AddRazorRuntimeCompilation();
             services.AddRazorPages();
             services.AddDatabaseDeveloperPageExceptionFilter();
-
+            services.AddAntiforgery(options =>
+            {
+                options.HeaderName = "X-CSRF-TOKEN";
+            });
             services.AddSingleton(this.configuration);
 
             // Data repositories
@@ -64,12 +67,10 @@ namespace ViceIO.Web
 
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
-
             services.AddTransient<IVicesService, VicesService>();
-
             services.AddTransient<IVicesCategoriesService, VicesCategoriesService>();
-
             services.AddTransient<Random>();
+            services.AddTransient<IViceVotesService, ViceVotesService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
