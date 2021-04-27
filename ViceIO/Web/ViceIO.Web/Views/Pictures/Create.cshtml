@@ -1,0 +1,44 @@
+﻿@model ViceIO.Web.ViewModels.Pictures.CreatePictureInputModel
+
+@{
+    var categories = this.Model
+        .Categories
+        .Select(c => new SelectListItem()
+        {
+            Text = c.Name,
+            Value = c.Id.ToString()
+        });
+}
+
+<h1>Create Picture...</h1>
+
+<form method="post" class="col-md-6 offset-md-3" enctype="multipart/form-data">
+
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <textarea asp-for="Name" rows="5" class="form-control"></textarea>
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Url"></label>
+        <textarea asp-for="Url" rows="5" class="form-control"></textarea>
+        <span asp-validation-for="Url" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="SourceUrl"></label>
+        <textarea asp-for="SourceUrl" rows="5" class="form-control"></textarea>
+        <span asp-validation-for="SourceUrl" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="CategoryId"></label>
+        <select asp-for="CategoryId" asp-items="categories" class="form-control"></select>
+        <span asp-validation-for="CategoryId" class="text-danger"></span>
+    </div>
+
+    <input type="submit" class="btn btn-primary" />
+</form>

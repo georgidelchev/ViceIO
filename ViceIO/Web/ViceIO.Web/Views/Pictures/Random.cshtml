@@ -1,0 +1,16 @@
+﻿@model ViceIO.Web.ViewModels.Pictures.GetPictureBaseViewModel
+
+<h1>Random Picture...</h1>
+<input type="button" class="btn btn-danger" value="Random" onclick="location.href='@Url.Action("Random", "Pictures")'" />
+<hr />
+<div class="card">
+    <div class="card-body">
+        <h6 class="card-subtitle mb-2 text-muted">Category: @Model.CategoryName</h6>
+        <p class="card-text">@Model.Name</p>
+        <p class="card-text">@Model.Url</p>
+        <p class="card-text">@Model.SourceUrl</p>
+        <p class="card-text">@Model.CreatedOnAsString</p>
+        <a asp-controller="Users" asp-action="Profile" asp-route-id="@Model.AddedByUserId" class="card-link">@Model.AddedByUserEmail</a>
+    </div>
+</div>
+<hr />

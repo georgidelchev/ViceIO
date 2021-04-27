@@ -29,7 +29,6 @@ namespace ViceIO.Services
                 Name = input.Name,
                 Url = input.Url,
                 SourceUrl = input.SourceUrl,
-
             };
 
             await this.picturesRepository.AddAsync(picture);
