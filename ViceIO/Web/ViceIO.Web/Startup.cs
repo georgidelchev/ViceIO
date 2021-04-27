@@ -72,7 +72,7 @@ namespace ViceIO.Web
             services.AddTransient<IPicturesService, PicturesService>();
             services.AddTransient<IPicturesCategoriesService, PicturesCategoriesService>();
 
-
+            // nqma kashu za sandra :(
             services.AddTransient<Random>();
             services.AddTransient<IViceVotesService, ViceVotesService>();
         }
