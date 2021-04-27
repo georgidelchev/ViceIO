@@ -45,7 +45,7 @@ namespace ViceIO.Services
                     CreatedOn = v.CreatedOn,
                     Id = v.Id,
                     AddedByUserId = v.AddedByUserId,
-                    AverageVote = v.ViceVotes.Average(vv => vv.Value),
+                    AverageVote = v.ViceVotes.Count == 0 ? 0 : v.ViceVotes.Average(vv => vv.Value),
                 })
                 .ToList();
 

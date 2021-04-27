@@ -69,6 +69,9 @@ namespace ViceIO.Web
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<IVicesService, VicesService>();
             services.AddTransient<IVicesCategoriesService, VicesCategoriesService>();
+            services.AddTransient<IPicturesService, PicturesService>();
+            services.AddTransient<IPicturesCategoriesService, PicturesCategoriesService>();
+
             services.AddTransient<Random>();
             services.AddTransient<IViceVotesService, ViceVotesService>();
         }
