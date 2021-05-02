@@ -1,4 +1,57 @@
-﻿@using ViceIO.Common
-@{
+﻿@{
     this.ViewData["Title"] = "Home Page";
 }
+
+<h1 style="text-align: center;">Welcome, @User.Identity?.Name!</h1>
+<hr />
+
+<div class="row">
+    <div class="col-lg-4">
+        <div class="bs-example">
+            <div class="card" style="width: 300px;">
+                <img src="//4.bp.blogspot.com/-ADiNflnnTA8/X5-UtPNiIcI/AAAAAAAACtI/OJZcr5wpDZgERBdj_Eec13Ox8Y78xCmYACK4BGAYYCw/s1600/Piki%2BTemplates%2BJoke%2B%25287%2529.png" class="card-img-top">
+                <div class="card-body text-center">
+                    <hr />
+                    <p class="card-text">Our Jokes here.</p>
+                    <hr />
+                    <a asp-controller="Vices" asp-action="Create" class="btn btn-danger">Create</a>
+                    <a asp-controller="Vices" asp-action="All" class="btn btn-primary">All</a>
+                    <a asp-controller="Vices" asp-action="Random" class="btn btn-primary">Random</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4">
+        <div class="bs-example">
+            <div class="card" style="width: 300px;">
+                <img src="https://lolfilter.com/files/thumbnails/331287034571370.png" class="card-img-top" alt="...">
+                <div class="card-body text-center">
+                    <hr />
+                    <p class="card-text">Our Pictures here.</p>
+                    <hr />
+                    <a asp-controller="Pictures" asp-action="Create" class="btn btn-danger">Create</a>
+                    <a asp-controller="Pictures" asp-action="All" class="btn btn-primary">All</a>
+                    <a asp-controller="Pictures" asp-action="Random" class="btn btn-primary">Random</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4">
+        <div class="bs-example">
+            <div class="card" style="width: 300px;">
+                <img src="https://i.pinimg.com/564x/20/20/c2/2020c25004af0ff7cf7f3186aa4e5618.jpg" style="width: 300px; height: 300px" class="card-img-top">
+                <div class="card-body text-center">
+                    <hr />
+                    <p class="card-text">Our Riddles here.</p>
+                    <hr />
+                    <a asp-controller="Riddles" asp-action="Create" class="btn btn-danger">Create</a>
+                    <a asp-controller="Riddles" asp-action="All" class="btn btn-primary">All</a>
+                    <a asp-controller="Riddles" asp-action="Random" class="btn btn-primary">Random</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr />

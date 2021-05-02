@@ -9,7 +9,12 @@ namespace ViceIO.Web.Controllers
     {
         public IActionResult Index()
         {
-            return this.View();
+            if (this.User.Identity.IsAuthenticated)
+            {
+                return this.View();
+            }
+
+            return this.Redirect("/Identity/Account/Login");
         }
 
         public IActionResult Privacy()

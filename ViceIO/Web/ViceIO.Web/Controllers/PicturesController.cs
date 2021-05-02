@@ -1,5 +1,6 @@
 ﻿using System.Security.Claims;
 using System.Threading.Tasks;
+
 using Microsoft.AspNetCore.Mvc;
 using ViceIO.Services;
 using ViceIO.Web.ViewModels.Pictures;
@@ -11,7 +12,8 @@ namespace ViceIO.Web.Controllers
         private readonly IPicturesService picturesService;
         private readonly IPicturesCategoriesService picturesCategoriesService;
 
-        public PicturesController(IPicturesService picturesService,
+        public PicturesController(
+            IPicturesService picturesService,
             IPicturesCategoriesService picturesCategoriesService)
         {
             this.picturesCategoriesService = picturesCategoriesService;

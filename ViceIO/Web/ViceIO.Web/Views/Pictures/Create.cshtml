@@ -18,20 +18,14 @@
 
     <div class="form-group">
         <label asp-for="Name"></label>
-        <textarea asp-for="Name" rows="5" class="form-control"></textarea>
+        <input asp-for="Name" rows="5" class="form-control"/>
         <span asp-validation-for="Name" class="text-danger"></span>
     </div>
 
     <div class="form-group">
         <label asp-for="Url"></label>
-        <textarea asp-for="Url" rows="5" class="form-control"></textarea>
+        <input asp-for="Url" rows="5" class="form-control"/>
         <span asp-validation-for="Url" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="SourceUrl"></label>
-        <textarea asp-for="SourceUrl" rows="5" class="form-control"></textarea>
-        <span asp-validation-for="SourceUrl" class="text-danger"></span>
     </div>
 
     <div class="form-group">
