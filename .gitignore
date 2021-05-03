@@ -4,7 +4,7 @@
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
 # ignore appsettings configuration files
-**/appsettings.development.json
+**/appsettings.json
 **/appsettings.staging.json
 **/appsettings.production.json
 
