@@ -10,5 +10,8 @@ namespace ViceIO.Web.ViewModels.Riddles
         [Required]
         [MaxLength(2000)]
         public string Content { get; set; }
+
+        [Display(Name = "Category")]
+        public int CategoryId { get; set; }
     }
 }

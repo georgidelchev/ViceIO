@@ -10,6 +10,10 @@ namespace ViceIO.Data.Models
         [MaxLength(2000)]
         public string Content { get; set; }
 
+        [Required]
+        [MaxLength(50)]
+        public string Answer { get; set; }
+
         public int CategoryId { get; set; }
 
         public virtual RiddleCategory Category { get; set; }
