@@ -357,5 +357,5 @@ MigrationBackup/
 .ionide/
 
 # Custom ignores
-/Web/ViceIO.Web/appsettings.json# Custom ignores
+/Web/ViceIO.Web/appsettings.json
 /Data/ViceIO.Data/appsettings.json
