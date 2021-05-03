@@ -41,4 +41,10 @@
     <ProjectReference Include="..\ViceIO.Web.Infrastructure\ViceIO.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\ViceIO.Web.ViewModels\ViceIO.Web.ViewModels.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
 </Project>
