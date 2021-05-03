@@ -1,6 +1,8 @@
-﻿using System.Security.Claims;
+﻿using System;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using ViceIO.Services;
 using ViceIO.Web.ViewModels.Pictures;
@@ -11,13 +13,17 @@ namespace ViceIO.Web.Controllers
     {
         private readonly IPicturesService picturesService;
         private readonly IPicturesCategoriesService picturesCategoriesService;
+        private readonly IWebHostEnvironment environment;
 
         public PicturesController(
             IPicturesService picturesService,
-            IPicturesCategoriesService picturesCategoriesService)
+            IPicturesCategoriesService picturesCategoriesService,
+            IWebHostEnvironment environment)
         {
             this.picturesCategoriesService = picturesCategoriesService;
             this.picturesService = picturesService;
+
+            this.environment = environment;
         }
 
         [HttpGet]
@@ -51,8 +57,18 @@ namespace ViceIO.Web.Controllers
             }
 
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var wwwrootPath = this.environment.WebRootPath;
 
-            await this.picturesService.CreateAsync(input, userId);
+            try
+            {
+                await this.picturesService.CreateAsync(input, userId, $"{wwwrootPath}/Pictures");
+            }
+            catch (Exception e)
+            {
+                this.ModelState.AddModelError(string.Empty, e.Message);
+
+                return this.View(input);
+            }
 
             return this.Redirect("/Pictures/All");
         }
