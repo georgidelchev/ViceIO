@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -21,8 +22,20 @@ namespace ViceIO.Services
             this.random = random;
         }
 
-        public async Task CreateAsync(CreatePictureInputModel input, string userId)
+        public async Task CreateAsync(CreatePictureInputModel input, string userId, string imagePath)
         {
+            Directory.CreateDirectory($"{imagePath}/Pictures/");
+
+            var extension = Path
+                .GetExtension(input.Picture.FileName)
+                .TrimStart('.');
+
+            if (!this.allowedExtensions
+                .Any(e => e.EndsWith(e)))
+            {
+                throw new Exception($"Invalid image extension {extension}.");
+            }
+
             var picture = new Picture()
             {
                 AddedByUserId = userId,
@@ -31,6 +44,11 @@ namespace ViceIO.Services
                 LocalUrl = input.Url,
                 SourceUrl = input.SourceUrl,
             };
+
+            var physicalPath = $"{imagePath}/Pictures/{picture.Id}.{extension}";
+
+            using var fileStream = new FileStream(physicalPath, FileMode.Create);
+            await input.Picture.CopyToAsync(fileStream);
 
             await this.picturesRepository.AddAsync(picture);
             await this.picturesRepository.SaveChangesAsync();
@@ -59,7 +77,7 @@ namespace ViceIO.Services
             var randomPicture = this.picturesRepository
                 .All()
                 .OrderBy(p => Guid.NewGuid())
-                .Skip(this.random.Next(1, this.picturesRepository.All().Count()))
+                .Skip(this.random.Next(0, this.picturesRepository.All().Count()))
                 .Select(p => new GetPictureBaseViewModel()
                 {
                     AddedByUserEmail = p.AddedByUser.Email,

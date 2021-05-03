@@ -7,7 +7,7 @@ namespace ViceIO.Services
 {
     public interface IPicturesService
     {
-        Task CreateAsync(CreatePictureInputModel input, string userId);
+        Task CreateAsync(CreatePictureInputModel input, string userId, string imagePath);
 
         IEnumerable<GetPictureBaseViewModel> GetAll();
 
