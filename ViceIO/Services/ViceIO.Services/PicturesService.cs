@@ -11,6 +11,7 @@ namespace ViceIO.Services
 {
     public class PicturesService : IPicturesService
     {
+        private readonly string[] allowedExtensions = { "jpg", "png", "gif" };
         private readonly IDeletableEntityRepository<Picture> picturesRepository;
         private readonly Random random;
 
@@ -27,7 +28,7 @@ namespace ViceIO.Services
                 AddedByUserId = userId,
                 CategoryId = input.CategoryId,
                 Name = input.Name,
-                Url = input.Url,
+                LocalUrl = input.Url,
                 SourceUrl = input.SourceUrl,
             };
 
@@ -43,7 +44,7 @@ namespace ViceIO.Services
                 {
                     AddedByUserEmail = p.AddedByUser.Email,
                     CategoryName = p.Category.Name,
-                    Url = p.Url,
+                    Url = p.LocalUrl,
                     SourceUrl = p.SourceUrl,
                     CreatedOn = p.CreatedOn,
                     Id = p.Id,
@@ -63,7 +64,7 @@ namespace ViceIO.Services
                 {
                     AddedByUserEmail = p.AddedByUser.Email,
                     CategoryName = p.Category.Name,
-                    Url = p.Url,
+                    Url = p.LocalUrl,
                     SourceUrl = p.SourceUrl,
                     CreatedOn = p.CreatedOn,
                     Id = p.Id,
@@ -92,7 +93,7 @@ namespace ViceIO.Services
                 {
                     AddedByUserEmail = p.AddedByUser.Email,
                     CategoryName = p.Category.Name,
-                    Url = p.Url,
+                    Url = p.LocalUrl,
                     SourceUrl = p.SourceUrl,
                     CreatedOn = p.CreatedOn,
                     Id = p.Id,
