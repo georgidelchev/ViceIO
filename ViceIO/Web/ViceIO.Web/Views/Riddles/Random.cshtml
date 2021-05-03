@@ -1,0 +1,21 @@
+﻿@model ViceIO.Web.ViewModels.Vices.GetRandomViceViewModel
+
+<div class="text-center">
+    <h1>Your random joke!</h1>
+</div>
+<br />
+
+<div class="text-center">
+    <input type="button" class="btn btn-danger" value="Another one" onclick="location.href='@Url.Action("Random", "Vices")'" />
+</div>
+<hr />
+
+<div class="card">
+    <div class="card-body">
+        <h6 class="card-subtitle mb-2 text-muted">Category: @Model.CategoryName</h6>
+        <p class="card-text">@Model.Content</p>
+        <p class="card-text">@Model.CreatedOnAsString</p>
+        <a asp-controller="Users" asp-action="Profile" asp-route-id="@Model.AddedByUserId" class="card-link">@Model.AddedByUserEmail</a>
+    </div>
+</div>
+<hr />
