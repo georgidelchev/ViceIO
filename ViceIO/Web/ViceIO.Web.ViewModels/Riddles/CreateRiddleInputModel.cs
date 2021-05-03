@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
+
+using ViceIO.Web.ViewModels.RiddlesCategories;
 
 namespace ViceIO.Web.ViewModels.Riddles
 {
@@ -11,7 +11,13 @@ namespace ViceIO.Web.ViewModels.Riddles
         [MaxLength(2000)]
         public string Content { get; set; }
 
+        [Required]
+        [MaxLength(50)]
+        public string Answer { get; set; }
+
         [Display(Name = "Category")]
         public int CategoryId { get; set; }
+
+        public IEnumerable<RiddlesCategoriesModel> Categories { get; set; }
     }
 }

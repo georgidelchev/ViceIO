@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 using ViceIO.Data.Common.Models;
 
@@ -21,5 +22,7 @@ namespace ViceIO.Data.Models
         public string AddedByUserId { get; set; }
 
         public virtual ApplicationUser AddedByUser { get; set; }
+
+        public ICollection<RiddleVote> RiddleVotes { get; set; } = new HashSet<RiddleVote>();
     }
 }
