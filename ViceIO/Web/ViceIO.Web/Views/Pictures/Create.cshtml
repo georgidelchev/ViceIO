@@ -18,13 +18,13 @@
 
     <div class="form-group">
         <label asp-for="Name"></label>
-        <input asp-for="Name" rows="5" class="form-control"/>
+        <input asp-for="Name" rows="5" class="form-control" />
         <span asp-validation-for="Name" class="text-danger"></span>
     </div>
 
     <div class="form-group">
         <label asp-for="Url"></label>
-        <input asp-for="Url" rows="5" class="form-control"/>
+        <input asp-for="Url" rows="5" class="form-control" />
         <span asp-validation-for="Url" class="text-danger"></span>
     </div>
 
@@ -32,6 +32,12 @@
         <label asp-for="CategoryId"></label>
         <select asp-for="CategoryId" asp-items="categories" class="form-control"></select>
         <span asp-validation-for="CategoryId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Picture"></label>
+        <input asp-for="Picture" class="form-control" />
+        <span asp-validation-for="Picture" class="text-danger"></span>
     </div>
 
     <input type="submit" class="btn btn-primary" />
