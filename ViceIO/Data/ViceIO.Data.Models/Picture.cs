@@ -12,8 +12,7 @@ namespace ViceIO.Data.Models
         public string Name { get; set; }
 
         [Required]
-        [Url]
-        public string Url { get; set; }
+        public string LocalUrl { get; set; }
 
         public string SourceUrl { get; set; }
 
