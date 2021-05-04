@@ -1,8 +1,7 @@
 ﻿using System.Security.Claims;
 using System.Threading.Tasks;
+
 using Microsoft.AspNetCore.Mvc;
-using ViceIO.Data.Common.Repositories;
-using ViceIO.Data.Models;
 using ViceIO.Services;
 using ViceIO.Web.ViewModels.Riddles;
 

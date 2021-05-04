@@ -79,11 +79,11 @@ namespace ViceIO.Web
             services.AddBreadcrumbs(this.GetType().Assembly, options =>
             {
                 options.TagName = "nav";
-                options.TagClasses = "";
+                options.TagClasses = string.Empty;
                 options.OlClasses = "breadcrumb font-weight-bold";
                 options.LiClasses = "breadcrumb-item";
                 options.ActiveLiClasses = "breadcrumb-item active text-success font-weight-bold";
-                options.SeparatorElement = "<li class=\"separator\">&nbsp;&nbsp;/&nbsp;&nbsp;</li>";
+                options.SeparatorElement = "<li class=\"separator\">&nbsp;&nbsp;&raquo;&nbsp;&nbsp;</li>";
             });
         }
 

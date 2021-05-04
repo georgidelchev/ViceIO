@@ -5,9 +5,9 @@
     this.ViewData["Name"] = "All Pictures";
 }
 
-<h1>All Pictures...</h1>
-<div>
-    <table class="table-responsive">
+<h1 class="text-center">You can check our pictures here.</h1>
+<div class="table-responsive">
+    <table>
         @{ var counter = 1; }
         <tr>
             @foreach (var picture in this.Model.Pictures)
@@ -16,7 +16,7 @@
                     <hr />
                     <div class="bs-example">
                         <div class="card" style="width: 240px;">
-                            <img src="/Pictures/Pictures/@picture.Id.@picture.Extension" class="card-img-top" width="300" height="240">
+                            <img src="/Pictures/Pictures/@picture.Id.@picture.Extension" class="card-img-top" width="350" height="240">
                             <div class="card-body text-center">
                                 <p class="card-text">@picture.Name</p>
                                 <hr />
@@ -32,8 +32,8 @@
                 </td>
                 if (counter % 4 == 0)
                 {
-                    @:</tr>
-                    @:<tr>
+                @:</tr>
+                @:<tr>
                 }
 
                 counter++;

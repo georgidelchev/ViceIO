@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using BootstrapBreadcrumbs.Core;
+
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using SmartBreadcrumbs.Attributes;
-using SmartBreadcrumbs.Nodes;
 using ViceIO.Services;
 using ViceIO.Web.ViewModels.Pictures;
 
