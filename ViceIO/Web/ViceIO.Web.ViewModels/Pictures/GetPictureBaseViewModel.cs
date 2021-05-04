@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace ViceIO.Web.ViewModels.Pictures
 {
@@ -17,6 +15,8 @@ namespace ViceIO.Web.ViewModels.Pictures
         public string CategoryName { get; set; }
 
         public string AddedByUserEmail { get; set; }
+
+        public string Extension { get; set; }
 
         public DateTime CreatedOn { get; set; }
 

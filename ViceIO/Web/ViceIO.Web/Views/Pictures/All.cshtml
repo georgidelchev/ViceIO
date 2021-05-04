@@ -1,5 +1,4 @@
-﻿@using System.Security.Claims
-@model ViceIO.Web.ViewModels.Pictures.PicturesListViewModel
+﻿@model ViceIO.Web.ViewModels.Pictures.PicturesListViewModel
 
 @{
     this.ViewData["Name"] = "All Pictures";
@@ -7,17 +6,55 @@
 
 <h1>All Pictures...</h1>
 
-@foreach (var picture in this.Model.Pictures)
-{
-    <hr />
-    <div class="card">
-        <div class="card-body">
-            <h6 class="card-subtitle mb-2 text-muted">Category: @picture.CategoryName</h6>
-            <p class="card-text">@picture.Name</p>
-            <p class="card-text">@picture.Url</p>
-            <p class="card-text">@picture.SourceUrl</p>
-            <p class="card-text">@picture.CreatedOnAsString</p>
-            <a asp-controller="Users" asp-action="Profile" asp-route-id="@picture.AddedByUserId" class="card-link">@picture.AddedByUserEmail</a>
+<table>
+    @{ var counter = 1; }
+    <tr>
+        @foreach (var picture in this.Model.Pictures)
+        {
+            <td>
+                <hr />
+                <div class="bs-example">
+                    <div class="card" style="width: 200px;">
+                        <img src="/Pictures/Pictures/@picture.Id.@picture.Extension" class="card-img-top" width="300" height="200">
+                        <div class="card-body text-center">
+                            <p class="card-text">@picture.Name</p>
+                            <hr />
+                            <p class="card-text">Category: @picture.CategoryName</p>
+                            <hr />
+                            <a asp-controller="Users" asp-action="Profile" asp-route-id="@picture.AddedByUserId" class="card-link">@picture.AddedByUserEmail</a>
+                            <p class="card-text">Created On: @picture.CreatedOnAsString</p>
+                        </div>
+                    </div>
+                </div>
+            </td>
+            if (counter % 5 == 0)
+            {
+            @:</tr>
+            @:<tr>
+            }
+
+            counter++;
+        }
+    </tr>
+</table>
+<hr />
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-body ">
+            <img class="img-fluid" id="mimg" src="">
         </div>
     </div>
-}
+</div>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>
+<script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js" asp-append-version="true"></script>
+<script>
+    $('img').on('click', function () {
+        var sr = $(this).attr('src');
+        $('#mimg').attr('src', sr);
+        $('#myModal').modal('show');
+    });
+</script>

@@ -16,6 +16,8 @@ namespace ViceIO.Data.Models
 
         public string SourceUrl { get; set; }
 
+        public string Extension { get; set; }
+
         [Required]
         public int CategoryId { get; set; }
 

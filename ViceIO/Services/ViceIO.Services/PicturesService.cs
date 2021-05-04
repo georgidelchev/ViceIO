@@ -12,7 +12,7 @@ namespace ViceIO.Services
 {
     public class PicturesService : IPicturesService
     {
-        private readonly string[] allowedExtensions = { "jpg", "png", "gif" };
+        private readonly string[] allowedExtensions = { "jpg", "png" };
         private readonly IDeletableEntityRepository<Picture> picturesRepository;
         private readonly Random random;
 
@@ -43,15 +43,16 @@ namespace ViceIO.Services
                 Name = input.Name,
                 LocalUrl = input.Url,
                 SourceUrl = input.SourceUrl,
+                Extension = extension,
             };
+
+            await this.picturesRepository.AddAsync(picture);
+            await this.picturesRepository.SaveChangesAsync();
 
             var physicalPath = $"{imagePath}/Pictures/{picture.Id}.{extension}";
 
             using var fileStream = new FileStream(physicalPath, FileMode.Create);
             await input.Picture.CopyToAsync(fileStream);
-
-            await this.picturesRepository.AddAsync(picture);
-            await this.picturesRepository.SaveChangesAsync();
         }
 
         public IEnumerable<GetPictureBaseViewModel> GetAll()
@@ -67,6 +68,8 @@ namespace ViceIO.Services
                     CreatedOn = p.CreatedOn,
                     Id = p.Id,
                     AddedByUserId = p.AddedByUserId,
+                    Extension = p.Extension,
+                    Name = p.Name,
                 });
 
             return pictures;
