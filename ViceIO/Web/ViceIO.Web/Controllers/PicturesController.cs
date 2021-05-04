@@ -27,11 +27,19 @@ namespace ViceIO.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult All()
+        public IActionResult All(int id = 1)
         {
+            if (id <= 0)
+            {
+                return this.NotFound();
+            }
+
             var viewModel = new PicturesListViewModel()
             {
-                Pictures = this.picturesService.GetAll(),
+                Pictures = this.picturesService.GetAll(id, 12),
+                ItemsPerPage = 12,
+                PageNumber = id,
+                RecipesCount = this.picturesService.GetCount(),
             };
 
             return this.View(viewModel);

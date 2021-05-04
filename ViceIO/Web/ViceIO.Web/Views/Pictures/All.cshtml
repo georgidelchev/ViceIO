@@ -14,8 +14,8 @@
             <td>
                 <hr />
                 <div class="bs-example">
-                    <div class="card" style="width: 200px;">
-                        <img src="/Pictures/Pictures/@picture.Id.@picture.Extension" class="card-img-top" width="300" height="200">
+                    <div class="card" style="width: 250px;">
+                        <img src="/Pictures/Pictures/@picture.Id.@picture.Extension" class="card-img-top" width="300" height="250">
                         <div class="card-body text-center">
                             <p class="card-text">@picture.Name</p>
                             <hr />
@@ -27,7 +27,7 @@
                     </div>
                 </div>
             </td>
-            if (counter % 5 == 0)
+            if (counter % 4 == 0)
             {
             @:</tr>
             @:<tr>
@@ -39,7 +39,9 @@
 </table>
 <hr />
 
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<partial name="_PagingPartial" model="@Model" />
+
+<div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-body ">
             <img class="img-fluid" id="mimg" src="">
@@ -51,6 +53,7 @@
 <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
 <script src="~/lib/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>
 <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js" asp-append-version="true"></script>
+
 <script>
     $('img').on('click', function () {
         var sr = $(this).attr('src');

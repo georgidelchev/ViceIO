@@ -2,7 +2,7 @@
 
 namespace ViceIO.Web.ViewModels.Pictures
 {
-    public class PicturesListViewModel
+    public class PicturesListViewModel : PagingViewModel
     {
         public IEnumerable<GetPictureBaseViewModel> Pictures { get; set; }
     }

@@ -55,7 +55,7 @@ namespace ViceIO.Services
             await input.Picture.CopyToAsync(fileStream);
         }
 
-        public IEnumerable<GetPictureBaseViewModel> GetAll()
+        public IEnumerable<GetPictureBaseViewModel> GetAll(int page, int itemsPerPage = 12)
         {
             var pictures = this.picturesRepository
                 .All()
@@ -70,7 +70,10 @@ namespace ViceIO.Services
                     AddedByUserId = p.AddedByUserId,
                     Extension = p.Extension,
                     Name = p.Name,
-                });
+                })
+                .Skip((page - 1) * itemsPerPage)
+                .Take(itemsPerPage)
+                .ToList();
 
             return pictures;
         }
