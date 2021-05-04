@@ -96,7 +96,9 @@ namespace ViceIO.Web.Controllers
         [Breadcrumb("Details", FromAction = "All", FromController = typeof(PicturesController))]
         public IActionResult Details(int id)
         {
-            return this.View();
+            var viewModel = this.picturesService.Details(id);
+
+            return this.View(viewModel);
         }
     }
 }

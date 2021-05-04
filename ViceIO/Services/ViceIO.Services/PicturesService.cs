@@ -127,5 +127,26 @@ namespace ViceIO.Services
 
             return picture;
         }
+
+        public GetPictureDetailsViewModel Details(int pictureId)
+        {
+            var pictureDetails = this.picturesRepository
+                .All()
+                .Where(p => p.Id == pictureId)
+                .Select(p => new GetPictureDetailsViewModel()
+                {
+                    AddedByUserEmail = p.AddedByUser.Email,
+                    AverageVote = 0.0, // TODO: Implement average.
+                    CategoryName = p.Category.Name,
+                    CreatedOn = p.CreatedOn,
+                    Name = p.Name,
+                    Id = p.Id,
+                    AddedByUserId = p.AddedByUserId,
+                    Extension = p.Extension,
+                })
+                .FirstOrDefault();
+
+            return pictureDetails;
+        }
     }
 }

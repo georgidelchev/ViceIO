@@ -1,1 +1,17 @@
-﻿<h1>Picture Details...</h1>
+﻿@model ViceIO.Web.ViewModels.Pictures.GetPictureDetailsViewModel
+
+<h1>Picture Details...</h1>
+
+<div class="bs-example">
+    <div class="card" style="width: 240px;">
+        <img src="/Pictures/Pictures/@Model.Id.@Model.Extension" class="card-img-top" width="350" height="240">
+        <div class="card-body text-center">
+            <p class="card-text">@Model.Name</p>
+            <hr />
+            <p class="card-text">Category: @Model.CategoryName</p>
+            <hr />
+            <a asp-controller="Users" asp-action="Profile" asp-route-id="@Model.AddedByUserId" class="card-link">@Model.AddedByUserEmail</a>
+            <p class="card-text">Created On: @Model.CreatedOnAsString</p>
+        </div>
+    </div>
+</div>

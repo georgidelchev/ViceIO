@@ -16,5 +16,7 @@ namespace ViceIO.Services
         int GetCount();
 
         GetPictureBaseViewModel GetById(int pictureId);
+
+        GetPictureDetailsViewModel Details(int pictureId);
     }
 }
