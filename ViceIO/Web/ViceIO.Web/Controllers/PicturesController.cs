@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
-
+using BootstrapBreadcrumbs.Core;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using SmartBreadcrumbs.Attributes;
+using SmartBreadcrumbs.Nodes;
 using ViceIO.Services;
 using ViceIO.Web.ViewModels.Pictures;
 
@@ -27,6 +29,7 @@ namespace ViceIO.Web.Controllers
         }
 
         [HttpGet]
+        [Breadcrumb("All Pictures", FromAction = "Index", FromController = typeof(HomeController))]
         public IActionResult All(int id = 1)
         {
             if (id <= 0)
@@ -46,6 +49,7 @@ namespace ViceIO.Web.Controllers
         }
 
         [HttpGet]
+        [Breadcrumb("Create Picture", FromAction = "Index", FromController = typeof(HomeController))]
         public IActionResult Create()
         {
             var viewModel = new CreatePictureInputModel()
@@ -82,11 +86,18 @@ namespace ViceIO.Web.Controllers
         }
 
         [HttpGet]
+        [Breadcrumb("Random Picture", FromAction = "Index", FromController = typeof(HomeController))]
         public IActionResult Random()
         {
             var viewModel = this.picturesService.GetRandom();
 
             return this.View(viewModel);
+        }
+
+        [Breadcrumb("Details", FromAction = "All", FromController = typeof(PicturesController))]
+        public IActionResult Details(int id)
+        {
+            return this.View();
         }
     }
 }

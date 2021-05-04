@@ -1,42 +1,46 @@
 ﻿@model ViceIO.Web.ViewModels.Pictures.PicturesListViewModel
+<breadcrumbs-nav home-action="All" home-controller="Pictures" home-title="Pictures"></breadcrumbs-nav>
 
 @{
     this.ViewData["Name"] = "All Pictures";
 }
 
 <h1>All Pictures...</h1>
-
-<table>
-    @{ var counter = 1; }
-    <tr>
-        @foreach (var picture in this.Model.Pictures)
-        {
-            <td>
-                <hr />
-                <div class="bs-example">
-                    <div class="card" style="width: 250px;">
-                        <img src="/Pictures/Pictures/@picture.Id.@picture.Extension" class="card-img-top" width="300" height="250">
-                        <div class="card-body text-center">
-                            <p class="card-text">@picture.Name</p>
-                            <hr />
-                            <p class="card-text">Category: @picture.CategoryName</p>
-                            <hr />
-                            <a asp-controller="Users" asp-action="Profile" asp-route-id="@picture.AddedByUserId" class="card-link">@picture.AddedByUserEmail</a>
-                            <p class="card-text">Created On: @picture.CreatedOnAsString</p>
+<div>
+    <table class="table-responsive">
+        @{ var counter = 1; }
+        <tr>
+            @foreach (var picture in this.Model.Pictures)
+            {
+                <td>
+                    <hr />
+                    <div class="bs-example">
+                        <div class="card" style="width: 240px;">
+                            <img src="/Pictures/Pictures/@picture.Id.@picture.Extension" class="card-img-top" width="300" height="240">
+                            <div class="card-body text-center">
+                                <p class="card-text">@picture.Name</p>
+                                <hr />
+                                <p class="card-text">Category: @picture.CategoryName</p>
+                                <hr />
+                                <a asp-controller="Users" asp-action="Profile" asp-route-id="@picture.AddedByUserId" class="card-link">@picture.AddedByUserEmail</a>
+                                <p class="card-text">Created On: @picture.CreatedOnAsString</p>
+                                <hr />
+                                <a class="btn btn-primary" asp-controller="Pictures" asp-action="Details" asp-route-id="@picture.Id">Details</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </td>
-            if (counter % 4 == 0)
-            {
-            @:</tr>
-            @:<tr>
-            }
+                </td>
+                if (counter % 4 == 0)
+                {
+                    @:</tr>
+                    @:<tr>
+                }
 
-            counter++;
-        }
-    </tr>
-</table>
+                counter++;
+            }
+        </tr>
+    </table>
+</div>
 <hr />
 
 <partial name="_PagingPartial" model="@Model" />

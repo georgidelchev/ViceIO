@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using SmartBreadcrumbs.Extensions;
 using ViceIO.Data;
 using ViceIO.Data.Common;
 using ViceIO.Data.Common.Repositories;
@@ -72,9 +73,18 @@ namespace ViceIO.Web
             services.AddTransient<IPicturesService, PicturesService>();
             services.AddTransient<IPicturesCategoriesService, PicturesCategoriesService>();
 
-            // nqma kashu za sandra :(
             services.AddTransient<Random>();
             services.AddTransient<IViceVotesService, ViceVotesService>();
+
+            services.AddBreadcrumbs(this.GetType().Assembly, options =>
+            {
+                options.TagName = "nav";
+                options.TagClasses = "";
+                options.OlClasses = "breadcrumb font-weight-bold";
+                options.LiClasses = "breadcrumb-item";
+                options.ActiveLiClasses = "breadcrumb-item active text-success font-weight-bold";
+                options.SeparatorElement = "<li class=\"separator\">&nbsp;&nbsp;/&nbsp;&nbsp;</li>";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

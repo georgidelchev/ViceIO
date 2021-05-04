@@ -1,12 +1,14 @@
 ﻿using System.Diagnostics;
 
 using Microsoft.AspNetCore.Mvc;
+using SmartBreadcrumbs.Attributes;
 using ViceIO.Web.ViewModels;
 
 namespace ViceIO.Web.Controllers
 {
     public class HomeController : Controller
     {
+        [DefaultBreadcrumb("Home")]
         public IActionResult Index()
         {
             if (this.User.Identity.IsAuthenticated)
@@ -17,6 +19,7 @@ namespace ViceIO.Web.Controllers
             return this.Redirect("/Identity/Account/Login");
         }
 
+        [Breadcrumb("Privacy")]
         public IActionResult Privacy()
         {
             return this.View();
