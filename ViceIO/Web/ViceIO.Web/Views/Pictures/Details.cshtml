@@ -1,10 +1,10 @@
 ﻿@model ViceIO.Web.ViewModels.Pictures.GetPictureDetailsViewModel
 
-<h1>Picture Details...</h1>
+<h1 class="text-center">Details for: @Model.Name</h1>
 
-<div class="bs-example">
-    <div class="card" style="width: 240px;">
-        <img src="/Pictures/Pictures/@Model.Id.@Model.Extension" class="card-img-top" width="350" height="240">
+<div class="bs-example d-flex justify-content-center">
+    <div class="card" style="width: 500px;">
+        <img src="/Pictures/Pictures/@Model.Id.@Model.Extension" class="card-img-top" width="500" height="600">
         <div class="card-body text-center">
             <p class="card-text">@Model.Name</p>
             <hr />
