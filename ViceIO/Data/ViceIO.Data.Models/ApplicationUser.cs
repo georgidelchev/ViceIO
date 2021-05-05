@@ -44,5 +44,7 @@ namespace ViceIO.Data.Models
 
         public virtual ICollection<PictureVote> PictureVotes { get; set; }
             = new HashSet<PictureVote>();
+
+        public virtual ICollection<Feedback> Feedbacks { get; set; } = new HashSet<Feedback>();
     }
 }

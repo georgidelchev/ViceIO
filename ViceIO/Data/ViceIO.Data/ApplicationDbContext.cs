@@ -41,6 +41,8 @@ namespace ViceIO.Data
 
         public DbSet<ViceVote> ViceVotes { get; set; }
 
+        public DbSet<Feedback> Feedbacks { get; set; }
+
         public override int SaveChanges()
             => this.SaveChanges(true);
 
