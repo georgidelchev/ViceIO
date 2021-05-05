@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ViceIO.Services;
+using ViceIO.Web.ViewModels;
 using ViceIO.Web.ViewModels.VicesVotes;
 
 namespace ViceIO.Web.Controllers
@@ -21,7 +22,7 @@ namespace ViceIO.Web.Controllers
 
         [HttpPost]
         [Authorize]
-        public async Task<ActionResult<PostViceVoteResponseModel>> Post(PostViceVoteInputModel input)
+        public async Task<ActionResult<PostVotesResponseModel>> Post(PostViceVoteInputModel input)
         {
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
@@ -30,7 +31,7 @@ namespace ViceIO.Web.Controllers
             var averageVotes = this.viceVotesService
                 .GetAverageVotes(input.ViceId);
 
-            return new PostViceVoteResponseModel() { AverageVote = averageVotes };
+            return new PostVotesResponseModel() { AverageVote = averageVotes };
         }
     }
 }

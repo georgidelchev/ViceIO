@@ -136,7 +136,7 @@ namespace ViceIO.Services
                 .Select(p => new GetPictureDetailsViewModel()
                 {
                     AddedByUserEmail = p.AddedByUser.Email,
-                    AverageVote = 0.0, // TODO: Implement average.
+                    AverageVote = p.PictureVotes.Count == 0 ? 0 : p.PictureVotes.Average(pic => pic.Value),
                     CategoryName = p.Category.Name,
                     CreatedOn = p.CreatedOn,
                     Name = p.Name,

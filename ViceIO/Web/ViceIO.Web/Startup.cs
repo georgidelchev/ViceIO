@@ -73,8 +73,10 @@ namespace ViceIO.Web
             services.AddTransient<IPicturesService, PicturesService>();
             services.AddTransient<IPicturesCategoriesService, PicturesCategoriesService>();
 
-            services.AddTransient<Random>();
             services.AddTransient<IViceVotesService, ViceVotesService>();
+            services.AddTransient<IPictureVotesService, PictureVotesService>();
+
+            services.AddTransient<Random>();
 
             services.AddBreadcrumbs(this.GetType().Assembly, options =>
             {
