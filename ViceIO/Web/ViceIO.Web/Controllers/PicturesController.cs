@@ -76,9 +76,7 @@ namespace ViceIO.Web.Controllers
             }
             catch (Exception e)
             {
-                this.ModelState.AddModelError(string.Empty, e.Message);
-
-                return this.View(input);
+                return this.View("Error");
             }
 
             return this.Redirect("/Pictures/All");
@@ -90,7 +88,6 @@ namespace ViceIO.Web.Controllers
         {
             if (this.picturesService.GetCount() == 0)
             {
-                this.ModelState.AddModelError(string.Empty, "test");
                 return this.View("Error");
             }
 

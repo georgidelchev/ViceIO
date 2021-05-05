@@ -33,7 +33,7 @@ namespace ViceIO.Services
                 .TrimStart(PictureExtensionDelimiter);
 
             if (!this.allowedExtensions
-                .Any(e => e.EndsWith(e)))
+                .Any(e => e.EndsWith(extension)))
             {
                 throw new Exception($"Invalid image extension {extension}.");
             }
