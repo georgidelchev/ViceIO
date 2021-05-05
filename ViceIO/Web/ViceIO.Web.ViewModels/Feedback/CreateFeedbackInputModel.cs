@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace ViceIO.Web.ViewModels.Feedback
 {
@@ -9,6 +7,7 @@ namespace ViceIO.Web.ViewModels.Feedback
     {
         [Required]
         [MaxLength(50)]
+        [DisplayName("Full Name")]
         public string FullName { get; set; }
 
         [Required]

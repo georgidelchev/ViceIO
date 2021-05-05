@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using ViceIO.Common;
 using ViceIO.Data.Common.Repositories;
 using ViceIO.Data.Models;
 using ViceIO.Web.ViewModels.Vices;
@@ -11,8 +11,8 @@ namespace ViceIO.Services
 {
     public class VicesService : IVicesService
     {
-        private readonly IDeletableEntityRepository<Vice> vicesRepository;
         private readonly Random random;
+        private readonly IDeletableEntityRepository<Vice> vicesRepository;
 
         public VicesService(IDeletableEntityRepository<Vice> vicesRepository, Random random)
         {
@@ -57,7 +57,7 @@ namespace ViceIO.Services
             var randomVice = this.vicesRepository
                 .All()
                 .OrderBy(v => Guid.NewGuid())
-                .Skip(this.random.Next(1, this.vicesRepository.All().Count()))
+                .Skip(this.random.Next(GlobalConstants.GetRandomStartingIndex, this.vicesRepository.All().Count()))
                 .Select(v => new GetRandomViceViewModel()
                 {
                     AddedByUserEmail = v.AddedByUser.Email,

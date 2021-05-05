@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using ViceIO.Common;
 using ViceIO.Data.Common.Repositories;
 using ViceIO.Data.Models;
 using ViceIO.Web.ViewModels.Riddles;
@@ -59,7 +59,7 @@ namespace ViceIO.Services
             var randomRiddle = this.riddlesRepository
                 .All()
                 .OrderBy(r => Guid.NewGuid())
-                .Skip(this.random.Next(1, this.riddlesRepository.All().Count()))
+                .Skip(this.random.Next(GlobalConstants.GetRandomStartingIndex, this.riddlesRepository.All().Count()))
                 .Select(r => new GetRiddleBaseViewModel()
                 {
                     AddedByUserEmail = r.AddedByUser.Email,

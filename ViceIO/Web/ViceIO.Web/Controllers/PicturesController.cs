@@ -88,6 +88,12 @@ namespace ViceIO.Web.Controllers
         [Breadcrumb("Random Picture", FromAction = "Index", FromController = typeof(HomeController))]
         public IActionResult Random()
         {
+            if (this.picturesService.GetCount() == 0)
+            {
+                this.ModelState.AddModelError(string.Empty, "test");
+                return this.View("Error");
+            }
+
             var viewModel = this.picturesService.GetRandom();
 
             return this.View(viewModel);

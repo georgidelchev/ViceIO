@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+
 using ViceIO.Data.Common.Repositories;
 using ViceIO.Data.Models;
 using ViceIO.Web.ViewModels.Feedback;
@@ -13,25 +9,19 @@ namespace ViceIO.Services
     public class FeedbackService : IFeedbackService
     {
         private readonly IDeletableEntityRepository<Feedback> feedbackRepository;
-        private readonly IDeletableEntityRepository<ApplicationUser> usersRepository;
 
-        public FeedbackService(IDeletableEntityRepository<Feedback> feedbackRepository, IDeletableEntityRepository<ApplicationUser> usersRepository)
+        public FeedbackService(
+            IDeletableEntityRepository<Feedback> feedbackRepository)
         {
             this.feedbackRepository = feedbackRepository;
-            this.usersRepository = usersRepository;
         }
 
         public async Task CreateAsync(CreateFeedbackInputModel input, string userId)
         {
-            var email = this.usersRepository
-                .All()
-                .FirstOrDefault(u => u.Id == userId)
-                ?.Email;
-
             var feedback = new Feedback()
             {
                 Content = input.Content,
-                Email = email,
+                Email = input.Email,
                 FullName = input.FullName,
                 Subject = input.Subject,
                 UserId = userId,

@@ -1,16 +1,16 @@
 ﻿@model ViceIO.Web.ViewModels.Pictures.GetPictureBaseViewModel
 
-<h1>Random Picture...</h1>
-<input type="button" class="btn btn-danger" value="Random" onclick="location.href='@Url.Action("Random", "Pictures")'" />
+<h1 class="text-center">You got this random picture.</h1>
+
 <hr />
-<div class="card">
-    <div class="card-body">
-        <h6 class="card-subtitle mb-2 text-muted">Category: @Model.CategoryName</h6>
-        <p class="card-text">@Model.Name</p>
-        <p class="card-text">@Model.Url</p>
-        <p class="card-text">@Model.SourceUrl</p>
-        <p class="card-text">@Model.CreatedOnAsString</p>
-        <a asp-controller="Users" asp-action="Profile" asp-route-id="@Model.AddedByUserId" class="card-link">@Model.AddedByUserEmail</a>
+<div class="bs-example d-flex justify-content-center">
+    <div class="card" style="width: 430px;">
+        <img src="/Pictures/Pictures/@Model.Id.@Model.Extension" class="card-img-top" width="360" height="600">
+        <div class="card-body text-center">
+            <a class="btn btn-info btn-sm" asp-controller="Pictures" asp-action="Details" asp-route-id="@Model.Id">Details</a>
+            <input type="button" class="btn btn-danger btn-sm" value="Random" onclick="location.href='@Url.Action("Random", "Pictures")'" />
+            <hr />
+        </div>
     </div>
 </div>
 <hr />
