@@ -41,7 +41,6 @@ namespace ViceIO.Services
                 AddedByUserId = userId,
                 CategoryId = input.CategoryId,
                 Name = input.Name,
-                LocalUrl = input.Url,
                 SourceUrl = input.SourceUrl,
                 Extension = extension,
             };

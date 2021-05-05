@@ -10,11 +10,8 @@ namespace ViceIO.Web.ViewModels.Pictures
     {
         [Required]
         [MaxLength(25)]
+        [Display(Name = "Picture Name")]
         public string Name { get; set; }
-
-        [Required]
-        [Url]
-        public string Url { get; set; }
 
         public string SourceUrl { get; set; }
 
