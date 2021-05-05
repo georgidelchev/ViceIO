@@ -26,7 +26,7 @@ namespace ViceIO.Services
             var email = this.usersRepository
                 .All()
                 .FirstOrDefault(u => u.Id == userId)
-                .Email;
+                ?.Email;
 
             var feedback = new Feedback()
             {
