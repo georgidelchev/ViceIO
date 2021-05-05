@@ -75,7 +75,7 @@ namespace ViceIO.Web
 
             services.AddTransient<IViceVotesService, ViceVotesService>();
             services.AddTransient<IPictureVotesService, PictureVotesService>();
-
+            services.AddTransient<IFeedbackService, FeedbackService>();
             services.AddTransient<Random>();
 
             services.AddBreadcrumbs(this.GetType().Assembly, options =>
