@@ -9,7 +9,7 @@ namespace ViceIO.Services
     {
         Task CreateAsync(CreatePictureInputModel input, string userId, string imagePath);
 
-        IEnumerable<GetPictureBaseViewModel> GetAll(int page, int itemsPerPage = 12);
+        IEnumerable<AllPicturesViewModel> GetAll(int page, int itemsPerPage = 12);
 
         GetPictureBaseViewModel GetRandom();
 

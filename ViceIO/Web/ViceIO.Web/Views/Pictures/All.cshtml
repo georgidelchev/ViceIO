@@ -1,11 +1,11 @@
 ﻿@model ViceIO.Web.ViewModels.Pictures.PicturesListViewModel
-<breadcrumbs-nav home-action="All" home-controller="Pictures" home-title="Pictures"></breadcrumbs-nav>
 
 @{
     this.ViewData["Name"] = "All Pictures";
 }
 
 <h1 class="text-center">You can check our pictures here.</h1>
+
 <div class="table-responsive">
     <table>
         @{ var counter = 1; }
@@ -18,14 +18,8 @@
                         <div class="card" style="width: 230px;">
                             <img src="/Pictures/Pictures/@picture.Id.@picture.Extension" class="card-img-top" width="360" height="300">
                             <div class="card-body text-center">
-                                <p class="card-text">@picture.Name</p>
+                                <a class="btn btn-info btn-sm" asp-controller="Pictures" asp-action="Details" asp-route-id="@picture.Id">Details</a>
                                 <hr />
-                                <p class="card-text">Category: @picture.CategoryName</p>
-                                <hr />
-                                <a asp-controller="Users" asp-action="Profile" asp-route-id="@picture.AddedByUserId" class="card-link">@picture.AddedByUserEmail</a>
-                                <p class="card-text">Created On: @picture.CreatedOnAsString</p>
-                                <hr />
-                                <a class="btn btn-primary" asp-controller="Pictures" asp-action="Details" asp-route-id="@picture.Id">Details</a>
                             </div>
                         </div>
                     </div>

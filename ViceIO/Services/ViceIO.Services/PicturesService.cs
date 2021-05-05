@@ -55,21 +55,14 @@ namespace ViceIO.Services
             await input.Picture.CopyToAsync(fileStream);
         }
 
-        public IEnumerable<GetPictureBaseViewModel> GetAll(int page, int itemsPerPage = 12)
+        public IEnumerable<AllPicturesViewModel> GetAll(int page, int itemsPerPage = 12)
         {
             var pictures = this.picturesRepository
                 .All()
-                .Select(p => new GetPictureBaseViewModel()
+                .Select(p => new AllPicturesViewModel()
                 {
-                    AddedByUserEmail = p.AddedByUser.Email,
-                    CategoryName = p.Category.Name,
-                    Url = p.LocalUrl,
-                    SourceUrl = p.SourceUrl,
-                    CreatedOn = p.CreatedOn,
                     Id = p.Id,
-                    AddedByUserId = p.AddedByUserId,
                     Extension = p.Extension,
-                    Name = p.Name,
                 })
                 .Skip((page - 1) * itemsPerPage)
                 .Take(itemsPerPage)

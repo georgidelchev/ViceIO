@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+
 using ViceIO.Data.Common.Repositories;
 using ViceIO.Data.Models;
 using ViceIO.Web.ViewModels.Riddles;
@@ -14,7 +14,7 @@ namespace ViceIO.Services
         private readonly IDeletableEntityRepository<Riddle> riddlesRepository;
         private readonly Random random;
 
-        public RiddlesService(IDeletableEntityRepository<Riddle> riddlesRepository,Random random)
+        public RiddlesService(IDeletableEntityRepository<Riddle> riddlesRepository, Random random)
         {
             this.riddlesRepository = riddlesRepository;
             this.random = random;
