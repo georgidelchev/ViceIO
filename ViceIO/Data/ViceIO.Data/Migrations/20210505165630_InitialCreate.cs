@@ -215,14 +215,43 @@ namespace ViceIO.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Feedback",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FullName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Subject = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    Content = table.Column<string>(type: "nvarchar(1500)", maxLength: 1500, nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsClosed = table.Column<bool>(type: "bit", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Feedback", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Feedback_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Pictures",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
-                    Url = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LocalUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     SourceUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Extension = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
                     AddedByUserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -254,6 +283,7 @@ namespace ViceIO.Data.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Content = table.Column<string>(type: "nvarchar(2000)", maxLength: 2000, nullable: false),
+                    Answer = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
                     AddedByUserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -348,6 +378,7 @@ namespace ViceIO.Data.Migrations
                     PictureId = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Value = table.Column<byte>(type: "tinyint", nullable: false),
+                    RiddleId = table.Column<int>(type: "int", nullable: true),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
@@ -364,6 +395,12 @@ namespace ViceIO.Data.Migrations
                         name: "FK_RiddleVotes_Pictures_PictureId",
                         column: x => x.PictureId,
                         principalTable: "Pictures",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_RiddleVotes_Riddles_RiddleId",
+                        column: x => x.RiddleId,
+                        principalTable: "Riddles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -447,6 +484,16 @@ namespace ViceIO.Data.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Feedback_IsDeleted",
+                table: "Feedback",
+                column: "IsDeleted");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Feedback_UserId",
+                table: "Feedback",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_PictureCategories_IsDeleted",
                 table: "PictureCategories",
                 column: "IsDeleted");
@@ -502,6 +549,11 @@ namespace ViceIO.Data.Migrations
                 column: "PictureId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_RiddleVotes_RiddleId",
+                table: "RiddleVotes",
+                column: "RiddleId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_RiddleVotes_UserId",
                 table: "RiddleVotes",
                 column: "UserId");
@@ -555,10 +607,10 @@ namespace ViceIO.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "PictureVotes");
+                name: "Feedback");
 
             migrationBuilder.DropTable(
-                name: "Riddles");
+                name: "PictureVotes");
 
             migrationBuilder.DropTable(
                 name: "RiddleVotes");
@@ -570,16 +622,19 @@ namespace ViceIO.Data.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "RiddleCategories");
+                name: "Pictures");
 
             migrationBuilder.DropTable(
-                name: "Pictures");
+                name: "Riddles");
 
             migrationBuilder.DropTable(
                 name: "Vices");
 
             migrationBuilder.DropTable(
                 name: "PictureCategories");
+
+            migrationBuilder.DropTable(
+                name: "RiddleCategories");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

@@ -1,1 +1,33 @@
-﻿
+﻿@model ViceIO.Web.ViewModels.Feedback.CreateFeedbackInputModel
+
+<div class="text-center">
+    <h1>Hello, @User.Identity?.Name!</h1>
+    <h2>You can write your feedback here!</h2>
+</div>
+<hr />
+
+<form method="post" class="col-md-6 offset-md-3" enctype="multipart/form-data">
+
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div class="form-group text-center">
+        <label asp-for="FullName"></label>
+        <textarea asp-for="FullName" rows="5" class="form-control"></textarea>
+        <span asp-validation-for="FullName" class="text-danger"></span>
+    </div>
+    <div class="form-group text-center">
+        <label asp-for="Subject"></label>
+        <textarea asp-for="Subject" rows="5" class="form-control"></textarea>
+        <span asp-validation-for="Subject" class="text-danger"></span>
+    </div>
+    <div class="form-group text-center">
+        <label asp-for="Content"></label>
+        <textarea asp-for="Content" rows="5" class="form-control"></textarea>
+        <span asp-validation-for="Content" class="text-danger"></span>
+    </div>
+
+    <div class="text-center">
+        <input type="submit" class="btn btn-danger " />
+    </div>
+</form>
+<hr />
