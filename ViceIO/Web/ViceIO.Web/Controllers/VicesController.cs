@@ -69,7 +69,7 @@ namespace ViceIO.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult ById(int id)
+        public IActionResult Details(int id)
         {
             return this.View();
         }
