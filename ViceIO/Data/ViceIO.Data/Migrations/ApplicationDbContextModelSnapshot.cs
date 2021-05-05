@@ -294,7 +294,7 @@ namespace ViceIO.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Feedbacks");
+                    b.ToTable("Feedback");
                 });
 
             modelBuilder.Entity("ViceIO.Data.Models.Picture", b =>
@@ -700,7 +700,7 @@ namespace ViceIO.Data.Migrations
             modelBuilder.Entity("ViceIO.Data.Models.Feedback", b =>
                 {
                     b.HasOne("ViceIO.Data.Models.ApplicationUser", "User")
-                        .WithMany("Feedbacks")
+                        .WithMany("Feedback")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -828,7 +828,7 @@ namespace ViceIO.Data.Migrations
                 {
                     b.Navigation("Claims");
 
-                    b.Navigation("Feedbacks");
+                    b.Navigation("Feedback");
 
                     b.Navigation("Logins");
 

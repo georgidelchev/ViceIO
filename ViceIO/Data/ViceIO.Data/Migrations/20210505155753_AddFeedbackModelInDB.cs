@@ -9,7 +9,7 @@ namespace ViceIO.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Feedbacks",
+                name: "Feedback",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -38,19 +38,19 @@ namespace ViceIO.Data.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_Feedbacks_IsDeleted",
-                table: "Feedbacks",
+                table: "Feedback",
                 column: "IsDeleted");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Feedbacks_UserId",
-                table: "Feedbacks",
+                table: "Feedback",
                 column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Feedbacks");
+                name: "Feedback");
         }
     }
 }
