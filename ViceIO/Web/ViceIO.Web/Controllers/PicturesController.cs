@@ -74,7 +74,7 @@ namespace ViceIO.Web.Controllers
             {
                 await this.picturesService.CreateAsync(input, userId, $"{wwwrootPath}/Pictures");
             }
-            catch (Exception e)
+            catch
             {
                 return this.View("Error");
             }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+
 using ViceIO.Common;
 using ViceIO.Data.Common.Repositories;
 using ViceIO.Data.Models;
@@ -14,7 +15,7 @@ namespace ViceIO.Services
     {
         private const char PictureExtensionDelimiter = '.';
 
-        private readonly string[] allowedExtensions = { "jpg", "png" };
+        private readonly string[] allowedExtensions = { "jpg", "png", "jfif", "exif", "gif", "bmp", "ppm", "pgm", "pbm", "pnm", "heif", "bat" };
         private readonly IDeletableEntityRepository<Picture> picturesRepository;
         private readonly Random random;
 
@@ -33,7 +34,7 @@ namespace ViceIO.Services
                 .TrimStart(PictureExtensionDelimiter);
 
             if (!this.allowedExtensions
-                .Any(e => e.EndsWith(extension)))
+                .Any(e => e.ToLower().EndsWith(extension.ToLower())))
             {
                 throw new Exception($"Invalid image extension {extension}.");
             }
