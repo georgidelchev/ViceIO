@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+
 using ViceIO.Data.Common.Models;
 
 namespace ViceIO.Data.Models
@@ -28,6 +29,5 @@ namespace ViceIO.Data.Models
         public string UserId { get; set; }
 
         public virtual ApplicationUser User { get; set; }
-
     }
 }
