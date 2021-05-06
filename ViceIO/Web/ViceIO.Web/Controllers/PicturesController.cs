@@ -74,11 +74,9 @@ namespace ViceIO.Web.Controllers
             {
                 await this.picturesService.CreateAsync(input, userId, $"{wwwrootPath}/Pictures");
             }
-            catch (Exception e)
+            catch
             {
-                this.ModelState.AddModelError(string.Empty, e.Message);
-
-                return this.View(input);
+                return this.View("Error");
             }
 
             return this.Redirect("/Pictures/All");
@@ -88,6 +86,11 @@ namespace ViceIO.Web.Controllers
         [Breadcrumb("Random Picture", FromAction = "Index", FromController = typeof(HomeController))]
         public IActionResult Random()
         {
+            if (this.picturesService.GetCount() == 0)
+            {
+                return this.View("Error");
+            }
+
             var viewModel = this.picturesService.GetRandom();
 
             return this.View(viewModel);

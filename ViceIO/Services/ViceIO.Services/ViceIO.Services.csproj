@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\ViceIO.Common\ViceIO.Common.csproj" />
     <ProjectReference Include="..\..\Web\ViceIO.Web.ViewModels\ViceIO.Web.ViewModels.csproj" />
   </ItemGroup>
 

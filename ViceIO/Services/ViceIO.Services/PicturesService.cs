@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
+using ViceIO.Common;
 using ViceIO.Data.Common.Repositories;
 using ViceIO.Data.Models;
 using ViceIO.Web.ViewModels.Pictures;
@@ -12,7 +13,9 @@ namespace ViceIO.Services
 {
     public class PicturesService : IPicturesService
     {
-        private readonly string[] allowedExtensions = { "jpg", "png" };
+        private const char PictureExtensionDelimiter = '.';
+
+        private readonly string[] allowedExtensions = { "jpg", "png", "jfif", "exif", "gif", "bmp", "ppm", "pgm", "pbm", "pnm", "heif", "bat" };
         private readonly IDeletableEntityRepository<Picture> picturesRepository;
         private readonly Random random;
 
@@ -28,10 +31,10 @@ namespace ViceIO.Services
 
             var extension = Path
                 .GetExtension(input.Picture.FileName)
-                .TrimStart('.');
+                .TrimStart(PictureExtensionDelimiter);
 
             if (!this.allowedExtensions
-                .Any(e => e.EndsWith(e)))
+                .Any(e => e.ToLower().EndsWith(extension.ToLower())))
             {
                 throw new Exception($"Invalid image extension {extension}.");
             }
@@ -54,7 +57,7 @@ namespace ViceIO.Services
             await input.Picture.CopyToAsync(fileStream);
         }
 
-        public IEnumerable<AllPicturesViewModel> GetAll(int page, int itemsPerPage = 12)
+        public IEnumerable<AllPicturesViewModel> GetAll(int page, int itemsPerPage)
         {
             var pictures = this.picturesRepository
                 .All()
@@ -75,16 +78,16 @@ namespace ViceIO.Services
             var randomPicture = this.picturesRepository
                 .All()
                 .OrderBy(p => Guid.NewGuid())
-                .Skip(this.random.Next(0, this.picturesRepository.All().Count()))
+                .Skip(this.random.Next(GlobalConstants.GetRandomStartingIndex, this.picturesRepository.All().Count()))
                 .Select(p => new GetPictureBaseViewModel()
                 {
                     AddedByUserEmail = p.AddedByUser.Email,
                     CategoryName = p.Category.Name,
-                    Url = p.LocalUrl,
                     SourceUrl = p.SourceUrl,
                     CreatedOn = p.CreatedOn,
                     Id = p.Id,
                     AddedByUserId = p.AddedByUserId,
+                    Extension = p.Extension,
                 })
                 .FirstOrDefault();
 
@@ -109,7 +112,6 @@ namespace ViceIO.Services
                 {
                     AddedByUserEmail = p.AddedByUser.Email,
                     CategoryName = p.Category.Name,
-                    Url = p.LocalUrl,
                     SourceUrl = p.SourceUrl,
                     CreatedOn = p.CreatedOn,
                     Id = p.Id,

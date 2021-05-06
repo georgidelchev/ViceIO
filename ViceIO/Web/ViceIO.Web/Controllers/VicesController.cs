@@ -58,9 +58,20 @@ namespace ViceIO.Web.Controllers
         [HttpGet]
         public IActionResult Random()
         {
+            if (this.vicesService.GetCount() == 0)
+            {
+                return this.View("Error");
+            }
+
             var viewModel = this.vicesService.GetRandom();
 
             return this.View(viewModel);
+        }
+
+        [HttpGet]
+        public IActionResult Details(int id)
+        {
+            return this.View();
         }
     }
 }
