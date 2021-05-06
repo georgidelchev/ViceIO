@@ -12,10 +12,10 @@
 
 <div class="card">
     <div class="card-body">
-        <h6 class="card-subtitle mb-2 text-muted">Category: @Model.CategoryName</h6>
-        <p class="card-text">@Model.Content</p>
-        <p class="card-text">@Model.CreatedOnAsString</p>
-        <a asp-controller="Users" asp-action="Profile" asp-route-id="@Model.AddedByUserId" class="card-link">@Model.AddedByUserEmail</a>
+        <p class="card-text">
+            @Model.ShortName @if (Model.Content.Length > 15)
+            {<text>...</text>}
+        </p>
     </div>
 </div>
 <hr />

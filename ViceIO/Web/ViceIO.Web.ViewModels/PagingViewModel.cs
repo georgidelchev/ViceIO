@@ -18,11 +18,11 @@ namespace ViceIO.Web.ViewModels
         public int NextPageNumber
             => this.PageNumber + 1;
 
-        public int RecipesCount { get; set; }
+        public int Count { get; set; }
 
         public int ItemsPerPage { get; set; }
 
         public int PagesCount
-            => (int)Math.Ceiling((double)this.RecipesCount / this.ItemsPerPage);
+            => (int)Math.Ceiling((double)this.Count / this.ItemsPerPage);
     }
 }

@@ -40,7 +40,7 @@ namespace ViceIO.Web.Controllers
                 Pictures = this.picturesService.GetAll(id, 12),
                 ItemsPerPage = 12,
                 PageNumber = id,
-                RecipesCount = this.picturesService.GetCount(),
+                Count = this.picturesService.GetCount(),
             };
 
             return this.View(viewModel);

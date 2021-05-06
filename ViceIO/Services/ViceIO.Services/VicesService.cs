@@ -34,20 +34,17 @@ namespace ViceIO.Services
             await this.vicesRepository.SaveChangesAsync();
         }
 
-        public IEnumerable<GetAllVicesViewModel> GetAll()
+        public IEnumerable<GetAllVicesViewModel> GetAll(int page, int itemsPerPage)
         {
             var vices = this.vicesRepository
                 .All()
                 .Select(v => new GetAllVicesViewModel
                 {
-                    AddedByUserEmail = v.AddedByUser.Email,
-                    CategoryName = v.Category.Name,
-                    Content = v.Content,
-                    CreatedOn = v.CreatedOn,
                     Id = v.Id,
-                    AddedByUserId = v.AddedByUserId,
-                    AverageVote = v.ViceVotes.Count == 0 ? 0 : v.ViceVotes.Average(vv => vv.Value),
+                    Content = v.Content,
                 })
+                .Skip((page - 1) * itemsPerPage)
+                .Take(itemsPerPage)
                 .ToList();
 
             return vices;
@@ -61,12 +58,8 @@ namespace ViceIO.Services
                 .Skip(this.random.Next(GlobalConstants.GetRandomStartingIndex, this.vicesRepository.All().Count()))
                 .Select(v => new GetRandomViceViewModel()
                 {
-                    AddedByUserEmail = v.AddedByUser.Email,
-                    CategoryName = v.Category.Name,
-                    Content = v.Content,
-                    CreatedOn = v.CreatedOn,
                     Id = v.Id,
-                    AddedByUserId = v.AddedByUserId,
+                    Content = v.Content,
                 })
                 .FirstOrDefault();
 
