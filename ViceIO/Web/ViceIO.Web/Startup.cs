@@ -45,6 +45,11 @@ namespace ViceIO.Web
                 options.AppId = "957657741704535";
                 options.AppSecret = "edf5718f4dc5214cc53665408f759041";
             });
+            services.AddAuthentication().AddGoogle(options =>
+            {
+                options.ClientId = "548559517542-dq4g4bampniae48asd8kiqful9mrelc6.apps.googleusercontent.com";
+                options.ClientSecret = "hDGbs9eK3ACezBYwe3ithK4Z";
+            });
             services.Configure<CookiePolicyOptions>(
                 options =>
                     {
