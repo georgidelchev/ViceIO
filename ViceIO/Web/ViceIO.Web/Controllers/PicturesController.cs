@@ -1,5 +1,4 @@
-﻿using System;
-using System.Security.Claims;
+﻿using System.Security.Claims;
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Hosting;
@@ -41,7 +40,7 @@ namespace ViceIO.Web.Controllers
                 Pictures = this.picturesService.GetAll(id, 12),
                 ItemsPerPage = 12,
                 PageNumber = id,
-                RecipesCount = this.picturesService.GetCount(),
+                Count = this.picturesService.GetCount(),
             };
 
             return this.View(viewModel);

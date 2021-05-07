@@ -19,11 +19,19 @@ namespace ViceIO.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult All()
+        public IActionResult All(int id = 1)
         {
-            var viewModel = new VicesListViewModel()
+            if (id <= 0)
             {
-                Vices = this.vicesService.GetAll(),
+                return this.NotFound();
+            }
+
+            var viewModel = new AllVicesListViewModel()
+            {
+                Vices = this.vicesService.GetAll(id, 12),
+                ItemsPerPage = 12,
+                PageNumber = id,
+                Count = this.vicesService.GetCount(),
             };
 
             return this.View(viewModel);

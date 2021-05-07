@@ -9,7 +9,7 @@ namespace ViceIO.Services
     {
         Task CreateAsync(CreateViceInputModel input, string userId);
 
-        IEnumerable<GetAllVicesViewModel> GetAll();
+        IEnumerable<GetAllVicesViewModel> GetAll(int page, int itemsPerPage = 12);
 
         GetRandomViceViewModel GetRandom();
 

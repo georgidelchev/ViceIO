@@ -2,7 +2,7 @@
 
 namespace ViceIO.Web.ViewModels.Vices
 {
-    public class VicesListViewModel
+    public class AllVicesListViewModel : PagingViewModel
     {
         public IEnumerable<GetAllVicesViewModel> Vices { get; set; }
     }
