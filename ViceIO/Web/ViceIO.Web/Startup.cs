@@ -42,8 +42,8 @@ namespace ViceIO.Web
                 .AddRoles<ApplicationRole>().AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddAuthentication().AddFacebook(options =>
             {
-                options.AppId = this.configuration["AppId"];
-                options.AppSecret = this.configuration["AppSecret"];
+                options.AppId = "957657741704535";
+                options.AppSecret = "edf5718f4dc5214cc53665408f759041";
             });
             services.Configure<CookiePolicyOptions>(
                 options =>
