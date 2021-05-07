@@ -11,7 +11,9 @@ namespace ViceIO.Data.Models
     {
         public ApplicationUser()
         {
-            this.Id = Guid.NewGuid().ToString();
+            this.Id = Guid
+                .NewGuid()
+                .ToString();
         }
 
         [Required]

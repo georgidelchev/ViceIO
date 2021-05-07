@@ -25,7 +25,6 @@ namespace ViceIO.Data.Models
         public bool IsClosed { get; set; }
 
         [Required]
-        [ForeignKey(nameof(ApplicationUser))]
         public string UserId { get; set; }
 
         public virtual ApplicationUser User { get; set; }
