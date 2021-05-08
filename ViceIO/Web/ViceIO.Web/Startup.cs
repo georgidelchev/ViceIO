@@ -19,6 +19,7 @@ using ViceIO.Data.Seeding;
 using ViceIO.Services;
 using ViceIO.Services.Mapping;
 using ViceIO.Services.Messaging;
+using ViceIO.Services.Services;
 using ViceIO.Web.ViewModels;
 
 namespace ViceIO.Web

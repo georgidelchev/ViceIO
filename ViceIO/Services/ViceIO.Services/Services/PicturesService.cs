@@ -9,7 +9,7 @@ using ViceIO.Data.Common.Repositories;
 using ViceIO.Data.Models;
 using ViceIO.Web.ViewModels.Pictures;
 
-namespace ViceIO.Services
+namespace ViceIO.Services.Services
 {
     public class PicturesService : IPicturesService
     {
@@ -19,7 +19,9 @@ namespace ViceIO.Services
         private readonly IDeletableEntityRepository<Picture> picturesRepository;
         private readonly Random random;
 
-        public PicturesService(IDeletableEntityRepository<Picture> picturesRepository, Random random)
+        public PicturesService(
+            IDeletableEntityRepository<Picture> picturesRepository,
+            Random random)
         {
             this.picturesRepository = picturesRepository;
             this.random = random;
@@ -53,7 +55,7 @@ namespace ViceIO.Services
 
             var physicalPath = $"{imagePath}/Pictures/{picture.Id}.{extension}";
 
-            using var fileStream = new FileStream(physicalPath, FileMode.Create);
+            await using var fileStream = new FileStream(physicalPath, FileMode.Create);
             await input.Picture.CopyToAsync(fileStream);
         }
 

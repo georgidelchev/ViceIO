@@ -13,6 +13,7 @@ namespace ViceIO.Data.Models
 
         public string SourceUrl { get; set; }
 
+        [Required]
         public string Extension { get; set; }
 
         [Required]

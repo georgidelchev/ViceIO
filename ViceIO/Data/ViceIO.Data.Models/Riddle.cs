@@ -15,15 +15,17 @@ namespace ViceIO.Data.Models
         [MaxLength(50)]
         public string Answer { get; set; }
 
+        [Required]
         public int CategoryId { get; set; }
 
         public virtual RiddleCategory Category { get; set; }
 
+        [Required]
         public string AddedByUserId { get; set; }
 
         public virtual ApplicationUser AddedByUser { get; set; }
 
-        public ICollection<RiddleVote> RiddleVotes { get; set; } = new HashSet<RiddleVote>();
-
+        public ICollection<RiddleVote> RiddleVotes { get; set; }
+            = new HashSet<RiddleVote>();
     }
 }

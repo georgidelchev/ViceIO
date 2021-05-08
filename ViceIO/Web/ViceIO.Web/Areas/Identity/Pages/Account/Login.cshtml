@@ -6,18 +6,19 @@
     ViewData["Title"] = "Log in";
 }
 
+<br /><br /><br /><br /><br />
 <div class="row justify-content-center">
-    <div class="col-lg-5">
+    <div class="col-lg-6">
         <section>
             <div class="card shadow border-0">
                 <div class="card-header" style="background: white">
                     <div class="text-muted text-center mb-3">Sign in with</div>
-                    <div class="btn-wrapper text-center">
-                        <section>
+                    <div class="text-center">
+                        <section style="height: 100%;">
                             @{
                                 if ((Model.ExternalLogins?.Count ?? 0) != 0)
                                 {
-                                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post">
                                         <p>
                                             <button type="submit" class="btn btn-light" name="provider" value="@Model.ExternalLogins[0].Name" title="Log in using your @Model.ExternalLogins[0].DisplayName account"><img src="/img/icons/common/facebook-new.png" /> @Model.ExternalLogins[0].DisplayName</button>
                                             <button type="submit" class="btn btn-light" name="provider" value="@Model.ExternalLogins[1].Name" title="Log in using your @Model.ExternalLogins[1].DisplayName account"><img src="/img/icons/common/google.svg" /> @Model.ExternalLogins[1].DisplayName</button>
@@ -35,8 +36,8 @@
                     <form id="account" method="post">
                         <div asp-validation-summary="All" class="text-danger"></div>
 
-                        <div class="form-group focused">
-                            <div class="input-group input-group-alternative">
+                        <div class="form-group">
+                            <div class="input-group">
                                 <div class="input-group-prepend">
                                     <label asp-for="Input.Email" class="input-group-text">
                                         <i class="fas fa-envelope"></i>
@@ -46,8 +47,8 @@
                             </div>
                             <span asp-validation-for="Input.Email" class="text-danger"></span>
                         </div>
-                        <div class="form-group focused">
-                            <div class="input-group input-group-alternative">
+                        <div class="form-group">
+                            <div class="input-group">
                                 <div class="input-group-prepend">
                                     <label asp-for="Input.Password" class="input-group-text">
                                         <i class="fas fa-key"></i>
@@ -71,8 +72,8 @@
                     </form>
                     <hr />
                     <div class="text-center">
-                            <input type="button" class="btn btn-secondary btn-sm" value="Create new account" onclick="location.href='@Url.RouteUrl(this.Model.ReturnUrl) @Url.Page("./Register")'" />
-                        <input type="button" class="btn btn-secondary btn-sm" value="Forgot password?" onclick="location.href='@Url.Page("./ForgotPassword")'"/>
+                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Create new account?</a><br/>
+                        <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
                     </div>
                 </div>
             </div>

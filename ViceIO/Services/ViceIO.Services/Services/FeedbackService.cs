@@ -4,7 +4,7 @@ using ViceIO.Data.Common.Repositories;
 using ViceIO.Data.Models;
 using ViceIO.Web.ViewModels.Feedback;
 
-namespace ViceIO.Services
+namespace ViceIO.Services.Services
 {
     public class FeedbackService : IFeedbackService
     {

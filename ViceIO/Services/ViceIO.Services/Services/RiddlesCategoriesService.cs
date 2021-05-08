@@ -5,13 +5,14 @@ using ViceIO.Data.Common.Repositories;
 using ViceIO.Data.Models;
 using ViceIO.Web.ViewModels.RiddlesCategories;
 
-namespace ViceIO.Services
+namespace ViceIO.Services.Services
 {
     public class RiddlesCategoriesService : IRiddlesCategoriesService
     {
         private readonly IDeletableEntityRepository<RiddleCategory> riddlesCategoriesRepository;
 
-        public RiddlesCategoriesService(IDeletableEntityRepository<RiddleCategory> riddlesCategoriesRepository)
+        public RiddlesCategoriesService(
+            IDeletableEntityRepository<RiddleCategory> riddlesCategoriesRepository)
         {
             this.riddlesCategoriesRepository = riddlesCategoriesRepository;
         }

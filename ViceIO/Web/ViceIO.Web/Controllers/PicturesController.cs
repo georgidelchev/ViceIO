@@ -52,7 +52,8 @@ namespace ViceIO.Web.Controllers
         {
             var viewModel = new CreatePictureInputModel()
             {
-                Categories = this.picturesCategoriesService.GetAll(),
+                Categories = this.picturesCategoriesService
+                    .GetAll(),
             };
 
             return this.View(viewModel);
@@ -66,12 +67,17 @@ namespace ViceIO.Web.Controllers
                 return this.View(input);
             }
 
-            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            var wwwrootPath = this.environment.WebRootPath;
+            var userId = this.User
+                .FindFirst(ClaimTypes.NameIdentifier)?
+                .Value;
+
+            var wwwrootPath = this.environment
+                .WebRootPath;
 
             try
             {
-                await this.picturesService.CreateAsync(input, userId, $"{wwwrootPath}/Pictures");
+                await this.picturesService
+                    .CreateAsync(input, userId, $"{wwwrootPath}/system_images");
             }
             catch
             {
@@ -98,7 +104,8 @@ namespace ViceIO.Web.Controllers
         [Breadcrumb("Details", FromAction = "All", FromController = typeof(PicturesController))]
         public IActionResult Details(int id)
         {
-            var viewModel = this.picturesService.Details(id);
+            var viewModel = this.picturesService
+                .Details(id);
 
             return this.View(viewModel);
         }

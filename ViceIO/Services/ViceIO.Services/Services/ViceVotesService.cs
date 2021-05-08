@@ -1,16 +1,17 @@
 ﻿using System.Linq;
-using System.Threading.Tasks;
 
+using System.Threading.Tasks;
 using ViceIO.Data.Common.Repositories;
 using ViceIO.Data.Models;
 
-namespace ViceIO.Services
+namespace ViceIO.Services.Services
 {
     public class ViceVotesService : IViceVotesService
     {
         private readonly IRepository<ViceVote> vicesVotesRepository;
 
-        public ViceVotesService(IRepository<ViceVote> vicesVotesRepository)
+        public ViceVotesService(
+            IRepository<ViceVote> vicesVotesRepository)
         {
             this.vicesVotesRepository = vicesVotesRepository;
         }

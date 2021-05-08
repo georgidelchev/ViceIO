@@ -5,13 +5,14 @@ using ViceIO.Data.Common.Repositories;
 using ViceIO.Data.Models;
 using ViceIO.Web.ViewModels.PicturesCategories;
 
-namespace ViceIO.Services
+namespace ViceIO.Services.Services
 {
     public class PicturesCategoriesService : IPicturesCategoriesService
     {
         private readonly IDeletableEntityRepository<PictureCategory> picturesCategoryRepository;
 
-        public PicturesCategoriesService(IDeletableEntityRepository<PictureCategory> picturesCategoryRepository)
+        public PicturesCategoriesService(
+            IDeletableEntityRepository<PictureCategory> picturesCategoryRepository)
         {
             this.picturesCategoryRepository = picturesCategoryRepository;
         }
@@ -23,7 +24,6 @@ namespace ViceIO.Services
                 .Select(x => new PicturesCategoriesModel()
                 {
                     Id = x.Id,
-                    ImageUrl = x.ImageUrl,
                     Name = x.Name,
                 })
                 .ToList();

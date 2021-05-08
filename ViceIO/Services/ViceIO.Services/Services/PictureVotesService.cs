@@ -4,13 +4,14 @@ using System.Threading.Tasks;
 using ViceIO.Data.Common.Repositories;
 using ViceIO.Data.Models;
 
-namespace ViceIO.Services
+namespace ViceIO.Services.Services
 {
     public class PictureVotesService : IPictureVotesService
     {
         private readonly IRepository<PictureVote> pictureVotesRepository;
 
-        public PictureVotesService(IRepository<PictureVote> pictureVotesRepository)
+        public PictureVotesService(
+            IRepository<PictureVote> pictureVotesRepository)
         {
             this.pictureVotesRepository = pictureVotesRepository;
         }
@@ -20,7 +21,7 @@ namespace ViceIO.Services
             if (this.pictureVotesRepository
                 .AllAsNoTracking()
                 .Any(pv => pv.PictureId == pictureId &&
-                         pv.UserId == userId))
+                           pv.UserId == userId))
             {
                 return;
             }

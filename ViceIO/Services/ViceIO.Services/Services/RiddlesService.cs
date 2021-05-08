@@ -15,7 +15,9 @@ namespace ViceIO.Services
         private readonly IDeletableEntityRepository<Riddle> riddlesRepository;
         private readonly Random random;
 
-        public RiddlesService(IDeletableEntityRepository<Riddle> riddlesRepository, Random random)
+        public RiddlesService(
+            IDeletableEntityRepository<Riddle> riddlesRepository,
+            Random random)
         {
             this.riddlesRepository = riddlesRepository;
             this.random = random;
