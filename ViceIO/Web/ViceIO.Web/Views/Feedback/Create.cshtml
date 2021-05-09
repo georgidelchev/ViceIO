@@ -2,37 +2,64 @@
 
 <div class="text-center">
     <h1>Hello, @User.Identity?.Name!</h1>
-    <h2>You can write your feedback here!</h2>
 </div>
 <hr />
 
 <form method="post" class="col-md-6 offset-md-3" enctype="multipart/form-data">
+    <h2>You can write your feedback here!</h2>
 
     <div asp-validation-summary="All" class="text-danger"></div>
 
-    <div class="form-group text-center">
-        <label asp-for="FullName"></label>
-        <input asp-for="FullName" class="form-control">
+    <div>
         <span asp-validation-for="FullName" class="text-danger"></span>
-    </div>
-    <div class="form-group text-center">
-        <label asp-for="Subject"></label>
-        <input asp-for="Subject" class="form-control">
-        <span asp-validation-for="Subject" class="text-danger"></span>
-    </div>
-    <div class="form-group text-center">
-        <label asp-for="Email"></label>
-        <input asp-for="Email" value="@Model.Email" class="form-control">
-        <span asp-validation-for="Email" class="text-danger"></span>
-    </div>
-    <div class="form-group text-center">
-        <label asp-for="Content"></label>
-        <textarea asp-for="Content" rows="5" class="form-control"></textarea>
-        <span asp-validation-for="Content" class="text-danger"></span>
-    </div>
 
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <label asp-for="FullName" class="input-group-text">
+                    <i class="fas fa-grin-alt"></i>
+                </label>
+            </div>
+            <input asp-for="FullName" placeholder="Full Name" class="form-control" />
+        </div>
+    </div>
+    <div>
+        <span asp-validation-for="Subject" class="text-danger"></span>
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <label asp-for="Subject" class="input-group-text">
+                    <i class="fas fa-pencil-alt"></i>
+                </label>
+            </div>
+            <input asp-for="Subject" placeholder="Subject" class="form-control" />
+        </div>
+    </div>
+    <div>
+        <span asp-validation-for="Email" class="text-danger"></span>
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <label asp-for="Email" class="input-group-text">
+                    <i class="fas fa-envelope"></i>
+                </label>
+            </div>
+            <input asp-for="Email" placeholder="Email" class="form-control" />
+        </div>
+    </div>
+    <div>
+        <span asp-validation-for="Content" class="text-danger"></span>
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <label asp-for="Content" class="input-group-text">
+                    <i class="fas fa-envelope-open-text"></i>
+                </label>
+            </div>
+            <textarea asp-for="Content" rows="10" placeholder="Content" class="form-control"></textarea>
+        </div>
+    </div>
     <div class="text-center">
-        <input type="submit" class="btn btn-danger " />
+        <input type="submit" class="btn btn-success" />
     </div>
 </form>
 <hr />

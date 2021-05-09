@@ -6,7 +6,11 @@
     ViewData["Title"] = "Log in";
 }
 
-<br /><br /><br /><br /><br />
+<br />
+<br />
+<br />
+<br />
+<br />
 <div class="row justify-content-center">
     <div class="col-lg-6">
         <section>
@@ -28,6 +32,8 @@
                             }
                         </section>
                     </div>
+                    <hr />
+
                 </div>
                 <div class="card-body" style="background: white">
                     <div class="text-center text-muted">
@@ -36,18 +42,15 @@
                     <form id="account" method="post">
                         <div asp-validation-summary="All" class="text-danger"></div>
 
-                        <div class="form-group">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <label asp-for="Input.Email" class="input-group-text">
-                                        <i class="fas fa-envelope"></i>
-                                    </label>
-                                </div>
-                                <input asp-for="Input.Email" placeholder="Email" class="form-control" />
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <label asp-for="Input.Email" class="input-group-text">
+                                    <i class="fas fa-envelope"></i>
+                                </label>
                             </div>
-                            <span asp-validation-for="Input.Email" class="text-danger"></span>
+                            <input asp-for="Input.Email" placeholder="Email" class="form-control" />
                         </div>
-                        <div class="form-group">
+                        <span asp-validation-for="Input.Email" class="text-danger"></span>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <label asp-for="Input.Password" class="input-group-text">
@@ -57,7 +60,6 @@
                                 <input asp-for="Input.Password" placeholder="Password" class="form-control" />
                             </div>
                             <span asp-validation-for="Input.Password" class="text-danger"></span>
-                        </div>
                         <div class="form-group d-flex justify-content-center">
                             <div class="form-check">
                                 <label asp-for="Input.RememberMe">
@@ -72,7 +74,7 @@
                     </form>
                     <hr />
                     <div class="text-center">
-                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Create new account?</a><br/>
+                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Create new account?</a><br />
                         <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
                     </div>
                 </div>
