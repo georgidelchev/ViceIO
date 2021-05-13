@@ -1,8 +1,12 @@
+<<<<<<< Updated upstream
 ﻿using System.Security.Claims;
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+=======
+﻿using Microsoft.AspNetCore.Authorization;
+>>>>>>> Stashed changes
 using Microsoft.AspNetCore.Mvc;
 using SmartBreadcrumbs.Attributes;
 using ViceIO.Data.Models;
@@ -45,9 +49,12 @@ namespace ViceIO.Web.Controllers
         {
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
+<<<<<<< Updated upstream
             await this.feedbackService.CreateAsync(input, userId);
 
             return this.Redirect("/");
+=======
+>>>>>>> Stashed changes
         }
     }
 }
