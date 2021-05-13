@@ -19,11 +19,19 @@ namespace ViceIO.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult All()
+        public IActionResult All(int id = 1)
         {
-            var viewModel = new VicesListViewModel()
+            if (id <= 0)
             {
-                Vices = this.vicesService.GetAll(),
+                return this.NotFound();
+            }
+
+            var viewModel = new AllVicesListViewModel()
+            {
+                Vices = this.vicesService.GetAll(id, 12),
+                ItemsPerPage = 12,
+                PageNumber = id,
+                Count = this.vicesService.GetCount(),
             };
 
             return this.View(viewModel);
@@ -58,9 +66,20 @@ namespace ViceIO.Web.Controllers
         [HttpGet]
         public IActionResult Random()
         {
+            if (this.vicesService.GetCount() == 0)
+            {
+                return this.View("Error");
+            }
+
             var viewModel = this.vicesService.GetRandom();
 
             return this.View(viewModel);
+        }
+
+        [HttpGet]
+        public IActionResult Details(int id)
+        {
+            return this.View();
         }
     }
 }

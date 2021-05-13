@@ -1,4 +1,4 @@
-﻿@model ViceIO.Web.ViewModels.Vices.VicesListViewModel
+﻿@model ViceIO.Web.ViewModels.Vices.AllVicesListViewModel
 
 @{
     this.ViewData["Name"] = "All Vices";
@@ -8,41 +8,41 @@
 <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
 <script src="~/lib/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>
 <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js" asp-append-version="true"></script>
-@foreach (var vice in this.Model.Vices)
-{
-    <hr />
-    <div class="card">
-        <div class="card-body">
-            <h6 class="card-subtitle mb-2 text-muted">Category: @vice.CategoryName</h6>
-            <p>
-                @vice.ShortName@if (vice.Content.Length > 10)
-                {<text>...</text><a asp-action="ById" asp-route-id="@vice.Id"><text> read more</text></a>}
-            </p>
-            <p class="card-text">@vice.CreatedOnAsString</p>
-            <a asp-controller="Users" asp-action="Profile" asp-route-id="@vice.AddedByUserId" class="card-link">@vice.AddedByUserEmail</a>
-            <br />
-            <br />
-            <span class="star-fill" style="cursor: pointer;" id="@vice.Id" data-vote="1"><i class="fas fa-star"></i></span>
-            <span class="star-fill" style="cursor: pointer;" id="@vice.Id" data-vote="2"><i class="fas fa-star"></i></span>
-            <span class="star-fill" style="cursor: pointer;" id="@vice.Id" data-vote="3"><i class="fas fa-star"></i></span>
-            <span class="star-fill" style="cursor: pointer;" id="@vice.Id" data-vote="4"><i class="fas fa-star"></i></span>
-            <span class="star-fill" style="cursor: pointer;" id="@vice.Id" data-vote="5"><i class="fas fa-star"></i></span>
-            <span>
-                <span id="averageVoteValue">
-                    @if (vice.AverageVote % 1 == 0)
-                    {
-                        @vice.AverageVote
-                    }
-                    else
-                    {
-                        @vice.AverageVote.ToString("0.0")
-                    }
-                </span>
-                <span> / 5</span>
-            </span>
-        </div>
-    </div>
-}
+
+<div class="table-responsive">
+    <table>
+        @{ var counter = 1; }
+        <tr>
+            @foreach (var vice in this.Model.Vices)
+            {
+                <td>
+                    <hr />
+                    <div class="bs-example d-flex justify-content-center">
+                        <div class="card" style="width: 210px;">
+                            <div class="card-body text-center">
+                                <p>
+                                    @vice.ShortName@if (vice.Content.Length > 15)
+                                    {<text>...</text>}
+                                </p>
+                                <a class="btn btn-info btn-sm" asp-controller="Vices" asp-action="Details" asp-route-id="@vice.Id">Read More</a>
+                                <hr />
+                            </div>
+                        </div>
+                    </div>
+                </td>
+                if (counter % 4 == 0)
+                {
+                @:</tr>
+                @:<tr>
+                }
+
+                counter++;
+            }
+        </tr>
+    </table>
+</div>
+
+<partial name="_PagingPartial" model="@Model" />
 
 <form method="post" id="antiForgeryForm"></form>
 <script>

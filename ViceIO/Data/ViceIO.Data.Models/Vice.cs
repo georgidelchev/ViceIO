@@ -11,8 +11,6 @@ namespace ViceIO.Data.Models
         [MaxLength(2000)]
         public string Content { get; set; }
 
-        public string SourceUrl { get; set; }
-
         [Required]
         public int CategoryId { get; set; }
 

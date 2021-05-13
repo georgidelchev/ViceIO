@@ -16,6 +16,7 @@ namespace ViceIO.Data.Models
 
         public virtual ApplicationUser User { get; set; }
 
+        [Required]
         public byte Value { get; set; }
     }
 }

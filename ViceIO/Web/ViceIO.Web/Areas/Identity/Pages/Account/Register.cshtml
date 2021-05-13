@@ -1,0 +1,88 @@
+﻿@page
+
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<div class="row justify-content-center">
+    <div class="col-lg-6">
+        <section>
+            <div class="card shadow border-0">
+                <div class="card-header" style="background: white">
+                    <div class="text-muted text-center mb-3">Sign up with</div>
+                    <div class="text-center">
+                        <section style="height: 100%;">
+                            @{
+                                if ((Model.ExternalLogins?.Count ?? 0) != 0)
+                                {
+                                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                                        <p>
+                                            <button type="submit" class="btn btn-light" name="provider" value="@Model.ExternalLogins[0].Name" title="Log in using your @Model.ExternalLogins[0].DisplayName account"><img src="/img/icons/common/facebook-new.png" /> @Model.ExternalLogins[0].DisplayName</button>
+                                            <button type="submit" class="btn btn-light" name="provider" value="@Model.ExternalLogins[1].Name" title="Log in using your @Model.ExternalLogins[1].DisplayName account"><img src="/img/icons/common/google.svg" /> @Model.ExternalLogins[1].DisplayName</button>
+                                        </p>
+                                    </form>
+                                }
+                            }
+                        </section>
+                    </div>
+                    <hr/>
+                </div>
+                <div class="card-body" style="background: white">
+                    <div class="text-center text-muted">
+                        Or sign in with your credentials
+                    </div>
+                    <form id="account" method="post">
+                        <div asp-validation-summary="All" class="text-danger"></div>
+
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <label asp-for="Input.Email" class="input-group-text">
+                                    <i class="fas fa-envelope"></i>
+                                </label>
+                            </div>
+                            <input asp-for="Input.Email" placeholder="Email" class="form-control" />
+                        </div>
+                        <span asp-validation-for="Input.Email" class="text-danger"></span>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <label asp-for="Input.Password" class="input-group-text">
+                                    <i class="fas fa-key"></i>
+                                </label>
+                            </div>
+                            <input asp-for="Input.Password" placeholder="Password" class="form-control" />
+                        </div>
+                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <label asp-for="Input.ConfirmPassword" class="input-group-text">
+                                    <i class="fas fa-check-double"></i>
+                                </label>
+                            </div>
+                            <input asp-for="Input.ConfirmPassword" placeholder="Confirm Password" class="form-control" />
+                        </div>
+                        <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary btn-sm">Sign up</button>
+                        </div>
+                        <hr/>
+                        <div class="text-center">
+                            <a asp-page="./Login">Log in?</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </section>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -73,7 +73,9 @@ namespace ViceIO.Data
 
             EntityIndexesConfiguration.Configure(builder);
 
-            var entityTypes = builder.Model.GetEntityTypes().ToList();
+            var entityTypes = builder.Model
+                .GetEntityTypes()
+                .ToList();
 
             var deletableEntityTypes = entityTypes
                 .Where(et => et.ClrType != null && typeof(IDeletableEntity).IsAssignableFrom(et.ClrType));
@@ -97,7 +99,8 @@ namespace ViceIO.Data
         private static void SetIsDeletedQueryFilter<T>(ModelBuilder builder)
             where T : class, IDeletableEntity
         {
-            builder.Entity<T>().HasQueryFilter(e => !e.IsDeleted);
+            builder.Entity<T>()
+                .HasQueryFilter(e => !e.IsDeleted);
         }
 
         private void ConfigureUserIdentityRelations(ModelBuilder builder)
@@ -107,15 +110,16 @@ namespace ViceIO.Data
         {
             var changedEntries = this.ChangeTracker
                 .Entries()
-                .Where(e =>
-                    e.Entity is IAuditInfo &&
-                    (e.State == EntityState.Added || e.State == EntityState.Modified));
+                .Where(e => e.Entity is IAuditInfo &&
+                            (e.State == EntityState.Added ||
+                             e.State == EntityState.Modified));
 
             foreach (var entry in changedEntries)
             {
                 var entity = (IAuditInfo)entry.Entity;
 
-                if (entry.State == EntityState.Added && entity.CreatedOn == default)
+                if (entry.State == EntityState.Added &&
+                    entity.CreatedOn == default)
                 {
                     entity.CreatedOn = DateTime.UtcNow;
                 }

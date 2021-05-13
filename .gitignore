@@ -3,11 +3,6 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
-# ignore appsettings configuration files
-**/appsettings.json
-**/appsettings.staging.json
-**/appsettings.production.json
-
 # User-specific files
 *.rsuser
 *.suo
@@ -355,7 +350,3 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
-
-# Custom ignores
-/Web/ViceIO.Web/appsettings.json
-/Data/ViceIO.Data/appsettings.json

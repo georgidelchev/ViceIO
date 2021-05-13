@@ -23,7 +23,9 @@ namespace ViceIO.Services.Mapping
 
             initialized = true;
 
-            var types = assemblies.SelectMany(a => a.GetExportedTypes()).ToList();
+            var types = assemblies
+                .SelectMany(a => a.GetExportedTypes())
+                .ToList();
 
             var config = new MapperConfigurationExpression();
             config.CreateProfile(
@@ -48,6 +50,7 @@ namespace ViceIO.Services.Mapping
                         map.CreateMappings(configuration);
                     }
                 });
+
             MapperInstance = new Mapper(new MapperConfiguration(config));
         }
 

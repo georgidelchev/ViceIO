@@ -1,5 +1,4 @@
-﻿using System;
-using System.Security.Claims;
+﻿using System.Security.Claims;
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Hosting;
@@ -41,7 +40,7 @@ namespace ViceIO.Web.Controllers
                 Pictures = this.picturesService.GetAll(id, 12),
                 ItemsPerPage = 12,
                 PageNumber = id,
-                RecipesCount = this.picturesService.GetCount(),
+                Count = this.picturesService.GetCount(),
             };
 
             return this.View(viewModel);
@@ -53,7 +52,8 @@ namespace ViceIO.Web.Controllers
         {
             var viewModel = new CreatePictureInputModel()
             {
-                Categories = this.picturesCategoriesService.GetAll(),
+                Categories = this.picturesCategoriesService
+                    .GetAll(),
             };
 
             return this.View(viewModel);
@@ -67,18 +67,21 @@ namespace ViceIO.Web.Controllers
                 return this.View(input);
             }
 
-            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            var wwwrootPath = this.environment.WebRootPath;
+            var userId = this.User
+                .FindFirst(ClaimTypes.NameIdentifier)?
+                .Value;
+
+            var wwwrootPath = this.environment
+                .WebRootPath;
 
             try
             {
-                await this.picturesService.CreateAsync(input, userId, $"{wwwrootPath}/Pictures");
+                await this.picturesService
+                    .CreateAsync(input, userId, $"{wwwrootPath}/system_images");
             }
-            catch (Exception e)
+            catch
             {
-                this.ModelState.AddModelError(string.Empty, e.Message);
-
-                return this.View(input);
+                return this.View("Error");
             }
 
             return this.Redirect("/Pictures/All");
@@ -88,6 +91,11 @@ namespace ViceIO.Web.Controllers
         [Breadcrumb("Random Picture", FromAction = "Index", FromController = typeof(HomeController))]
         public IActionResult Random()
         {
+            if (this.picturesService.GetCount() == 0)
+            {
+                return this.View("Error");
+            }
+
             var viewModel = this.picturesService.GetRandom();
 
             return this.View(viewModel);
@@ -96,7 +104,8 @@ namespace ViceIO.Web.Controllers
         [Breadcrumb("Details", FromAction = "All", FromController = typeof(PicturesController))]
         public IActionResult Details(int id)
         {
-            var viewModel = this.picturesService.Details(id);
+            var viewModel = this.picturesService
+                .Details(id);
 
             return this.View(viewModel);
         }

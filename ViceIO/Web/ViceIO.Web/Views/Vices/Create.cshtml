@@ -20,18 +20,30 @@
 
     <div asp-validation-summary="All" class="text-danger"></div>
 
-    <div class="form-group text-center">
-        <label asp-for="Content"></label>
-        <textarea asp-for="Content" rows="5" class="form-control"></textarea>
+    <div>
         <span asp-validation-for="Content" class="text-danger"></span>
-    </div>
 
-    <div class="form-group text-center">
-        <label asp-for="CategoryId"></label>
-        <select asp-for="CategoryId" asp-items="categories" class="form-control"></select>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <label asp-for="Content" class="input-group-text">
+                    <i class="fas fa-envelope-open-text"></i>
+                </label>
+            </div>
+            <textarea asp-for="Content" rows="10" placeholder="Content" class="form-control"></textarea>
+        </div>
+    </div>
+    <div>
         <span asp-validation-for="CategoryId" class="text-danger"></span>
+        <div class="text-center">Category</div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <label asp-for="CategoryId" class="input-group-text">
+                    <i class="fas fa-list-ol"></i>
+                </label>
+            </div>
+            <select asp-for="CategoryId" asp-items="categories" class="form-control">asd</select>
+        </div>
     </div>
-
     <div class="text-center">
         <input type="submit" class="btn btn-danger " />
     </div>

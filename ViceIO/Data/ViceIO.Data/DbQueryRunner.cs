@@ -17,7 +17,9 @@ namespace ViceIO.Data
 
         public Task RunQueryAsync(string query, params object[] parameters)
         {
-            return this.Context.Database.ExecuteSqlRawAsync(query, parameters);
+            return this.Context
+                .Database
+                .ExecuteSqlRawAsync(query, parameters);
         }
 
         public void Dispose()
@@ -31,7 +33,8 @@ namespace ViceIO.Data
         {
             if (disposing)
             {
-                this.Context?.Dispose();
+                this.Context?
+                    .Dispose();
             }
         }
     }

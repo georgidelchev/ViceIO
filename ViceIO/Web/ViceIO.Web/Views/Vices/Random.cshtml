@@ -3,19 +3,26 @@
 <div class="text-center">
     <h1>Your random joke!</h1>
 </div>
-<br />
-
-<div class="text-center">
-    <input type="button" class="btn btn-danger" value="Another one" onclick="location.href='@Url.Action("Random", "Vices")'" />
-</div>
 <hr />
 
-<div class="card">
-    <div class="card-body">
-        <h6 class="card-subtitle mb-2 text-muted">Category: @Model.CategoryName</h6>
-        <p class="card-text">@Model.Content</p>
-        <p class="card-text">@Model.CreatedOnAsString</p>
-        <a asp-controller="Users" asp-action="Profile" asp-route-id="@Model.AddedByUserId" class="card-link">@Model.AddedByUserEmail</a>
+<div class="bs-example d-flex justify-content-center">
+    <div class="card" style="width: 230px;">
+        <div class="card-body text-center">
+            <p>
+                @Model.ShortName@if (Model.Content.Length > 15)
+                {<text>...</text>}
+            </p>
+            @if (Model.Content.Length > 15)
+            {
+                <a class="btn btn-info btn-sm" asp-controller="Vices" asp-action="Details" asp-route-id="@Model.Id">Read More</a>
+            }
+            else
+            {
+                <a class="btn btn-info btn-sm" asp-controller="Vices" asp-action="Details" asp-route-id="@Model.Id">Details</a>
+            }
+            &nbsp;<input type="button" class="btn btn-danger btn-sm" value="Random" onclick="location.href='@Url.Action("Random", "Vices")'" />
+            <hr />
+        </div>
     </div>
 </div>
 <hr />

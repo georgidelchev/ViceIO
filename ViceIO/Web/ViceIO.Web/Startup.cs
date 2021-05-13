@@ -19,6 +19,7 @@ using ViceIO.Data.Seeding;
 using ViceIO.Services;
 using ViceIO.Services.Mapping;
 using ViceIO.Services.Messaging;
+using ViceIO.Services.Services;
 using ViceIO.Web.ViewModels;
 
 namespace ViceIO.Web
@@ -35,30 +36,47 @@ namespace ViceIO.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(
-                options => options.UseSqlServer(this.configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(this.configuration.GetConnectionString("DefaultConnection")));
 
             services.AddDefaultIdentity<ApplicationUser>(IdentityOptionsProvider.GetIdentityOptions)
-                .AddRoles<ApplicationRole>().AddEntityFrameworkStores<ApplicationDbContext>();
+                .AddRoles<ApplicationRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.AddAuthentication()
+                .AddFacebook(options =>
+                {
+                    options.AppId = "957657741704535";
+                    options.AppSecret = "edf5718f4dc5214cc53665408f759041";
+                })
+                .AddGoogle(options =>
+                {
+                    options.ClientId = "548559517542-dq4g4bampniae48asd8kiqful9mrelc6.apps.googleusercontent.com";
+                    options.ClientSecret = "hDGbs9eK3ACezBYwe3ithK4Z";
+                });
 
             services.Configure<CookiePolicyOptions>(
                 options =>
-                    {
-                        options.CheckConsentNeeded = context => true;
-                        options.MinimumSameSitePolicy = SameSiteMode.None;
-                    });
+                {
+                    options.CheckConsentNeeded = context => true;
+                    options.MinimumSameSitePolicy = SameSiteMode.None;
+                });
 
             services.AddControllersWithViews(
                 options =>
-                    {
-                        options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
-                    }).AddRazorRuntimeCompilation();
+                {
+                    options.Filters
+                        .Add(new AutoValidateAntiforgeryTokenAttribute());
+                })
+                .AddRazorRuntimeCompilation();
+
             services.AddRazorPages();
             services.AddDatabaseDeveloperPageExceptionFilter();
+
             services.AddAntiforgery(options =>
             {
                 options.HeaderName = "X-CSRF-TOKEN";
             });
+
             services.AddSingleton(this.configuration);
 
             // Data repositories
@@ -75,9 +93,12 @@ namespace ViceIO.Web
 
             services.AddTransient<IViceVotesService, ViceVotesService>();
             services.AddTransient<IPictureVotesService, PictureVotesService>();
+            services.AddTransient<IFeedbackService, FeedbackService>();
 
+            // Random service
             services.AddTransient<Random>();
 
+            // Breadcrumbs service
             services.AddBreadcrumbs(this.GetType().Assembly, options =>
             {
                 options.TagName = "nav";
@@ -85,7 +106,7 @@ namespace ViceIO.Web
                 options.OlClasses = "breadcrumb font-weight-bold";
                 options.LiClasses = "breadcrumb-item";
                 options.ActiveLiClasses = "breadcrumb-item active text-success font-weight-bold";
-                options.SeparatorElement = "<li class=\"separator\">&nbsp;&nbsp;&raquo;&nbsp;&nbsp;</li>";
+                options.SeparatorElement = "<li>&nbsp;&nbsp;&raquo;&nbsp;&nbsp;</li>";
             });
         }
 
@@ -97,9 +118,16 @@ namespace ViceIO.Web
             // Seed data on application startup
             using (var serviceScope = app.ApplicationServices.CreateScope())
             {
-                var dbContext = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+                var dbContext = serviceScope
+                    .ServiceProvider
+                    .GetRequiredService<ApplicationDbContext>();
+
                 dbContext.Database.Migrate();
-                new ApplicationDbContextSeeder().SeedAsync(dbContext, serviceScope.ServiceProvider).GetAwaiter().GetResult();
+
+                new ApplicationDbContextSeeder()
+                    .SeedAsync(dbContext, serviceScope.ServiceProvider)
+                    .GetAwaiter()
+                    .GetResult();
             }
 
             if (env.IsDevelopment())
@@ -122,13 +150,12 @@ namespace ViceIO.Web
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseEndpoints(
-                endpoints =>
-                    {
-                        endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
-                        endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
-                        endpoints.MapRazorPages();
-                    });
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();
+            });
         }
     }
 }

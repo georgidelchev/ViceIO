@@ -11,11 +11,9 @@ namespace ViceIO.Data.Models
         [MaxLength(25)]
         public string Name { get; set; }
 
-        [Required]
-        public string LocalUrl { get; set; }
-
         public string SourceUrl { get; set; }
 
+        [Required]
         public string Extension { get; set; }
 
         [Required]
