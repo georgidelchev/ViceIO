@@ -1,4 +1,4 @@
-﻿@model ViceIO.Web.ViewModels.Vices.AllVicesListViewModel
+﻿@model ViceIO.Web.ViewModels.Riddles.RiddlesListViewModel
 
 @{
     this.ViewData["Name"] = "All Vices";
@@ -8,14 +8,15 @@
 <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
 <script src="~/lib/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>
 <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js" asp-append-version="true"></script>
-@foreach (var vice in this.Model.Vices)
+
+@foreach (var vice in this.Model.Riddles)
 {
     <hr />
     <div class="card">
         <div class="card-body">
             <p>
-                @vice.ShortName@if (vice.Content.Length > 10)
-                {<text>...</text><a asp-action="ById" asp-route-id="@vice.Id"><text> read more</text></a>}
+                @*@vice.ShortName@if (vice.Content.Length > 10)
+                {<text>...</text><a asp-action="ById" asp-route-id="@vice.Id"><text> read more</text></a>}*@
             </p>
             <br />
             <br />
@@ -27,13 +28,13 @@
             <span>
                 <span id="averageVoteValue">
                     @*@if (vice.AverageVote % 1 == 0)
-                    {
-                        @vice.AverageVote
-                    }
-                    else
-                    {
-                        @vice.AverageVote.ToString("0.0")
-                    }*@
+                        {
+                            @vice.AverageVote
+                        }
+                        else
+                        {
+                            @vice.AverageVote.ToString("0.0")
+                        }*@
                 </span>
                 <span> / 5</span>
             </span>

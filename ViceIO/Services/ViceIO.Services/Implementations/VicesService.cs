@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using ViceIO.Common;
 using ViceIO.Data.Common.Repositories;
 using ViceIO.Data.Models;
+using ViceIO.Services.Mapping;
 using ViceIO.Web.ViewModels.Vices;
 
 namespace ViceIO.Services
@@ -36,63 +37,32 @@ namespace ViceIO.Services
             await this.vicesRepository.SaveChangesAsync();
         }
 
-        public IEnumerable<GetAllVicesViewModel> GetAll(int page, int itemsPerPage)
-        {
-            var vices = this.vicesRepository
+        public IEnumerable<T> GetAll<T>(int page, int itemsPerPage)
+            => this.vicesRepository
                 .All()
-                .Select(v => new GetAllVicesViewModel
-                {
-                    Id = v.Id,
-                    Content = v.Content,
-                })
+                .To<T>()
                 .Skip((page - 1) * itemsPerPage)
                 .Take(itemsPerPage)
                 .ToList();
 
-            return vices;
-        }
-
-        public GetRandomViceViewModel GetRandom()
-        {
-            var randomVice = this.vicesRepository
+        public T GetRandom<T>()
+            => this.vicesRepository
                 .All()
                 .OrderBy(v => Guid.NewGuid())
-                .Skip(this.random.Next(GlobalConstants.GetRandomStartingIndex, this.vicesRepository.All().Count()))
-                .Select(v => new GetRandomViceViewModel()
-                {
-                    Id = v.Id,
-                    Content = v.Content,
-                })
+                .Skip(this.random.Next(GlobalConstants.GetRandomStartingIndex, this.GetCount()))
+                .To<T>()
                 .FirstOrDefault();
 
-            return randomVice;
-        }
-
         public int GetCount()
-        {
-            var vicesCount = this.vicesRepository
+            => this.vicesRepository
                 .All()
                 .Count();
 
-            return vicesCount;
-        }
-
-        public GetViceBaseViewModel GetById(int viceId)
-        {
-            var vice = this.vicesRepository
+        public T GetById<T>(int viceId)
+            => this.vicesRepository
                 .All()
                 .Where(v => v.Id == viceId)
-                .Select(v => new GetViceBaseViewModel()
-                {
-                    AddedByUserEmail = v.AddedByUser.Email,
-                    CategoryName = v.Category.Name,
-                    Content = v.Content,
-                    CreatedOn = v.CreatedOn,
-                    Id = v.Id,
-                })
+                .To<T>()
                 .FirstOrDefault();
-
-            return vice;
-        }
     }
 }

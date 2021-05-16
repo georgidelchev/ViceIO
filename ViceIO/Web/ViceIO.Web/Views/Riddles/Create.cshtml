@@ -1,4 +1,4 @@
-﻿@model ViceIO.Web.ViewModels.Vices.CreateViceInputModel
+﻿@model ViceIO.Web.ViewModels.Riddles.CreateRiddleInputModel
 
 @{
     var categories = this.Model
@@ -12,18 +12,23 @@
 
 <div class="text-center">
     <h1>Hello, @User.Identity?.Name!</h1>
-    <h2>You can upload your own joke from here!</h2>
+    <h2>You can upload your own riddle from here!</h2>
 </div>
 <hr />
 
 <form method="post" class="col-md-6 offset-md-3" enctype="multipart/form-data">
-
     <div asp-validation-summary="All" class="text-danger"></div>
 
     <div class="form-group text-center">
         <label asp-for="Content"></label>
         <textarea asp-for="Content" rows="5" class="form-control"></textarea>
         <span asp-validation-for="Content" class="text-danger"></span>
+    </div>
+
+    <div class="form-group text-center">
+        <label asp-for="Answer"></label>
+        <input asp-for="Answer" class="form-control" />
+        <span asp-validation-for="Answer" class="text-danger"></span>
     </div>
 
     <div class="form-group text-center">

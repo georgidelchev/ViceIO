@@ -3,7 +3,7 @@ using System.Linq;
 
 using ViceIO.Data.Common.Repositories;
 using ViceIO.Data.Models;
-using ViceIO.Web.ViewModels.RiddlesCategories;
+using ViceIO.Services.Mapping;
 
 namespace ViceIO.Services.Services
 {
@@ -17,18 +17,10 @@ namespace ViceIO.Services.Services
             this.riddlesCategoriesRepository = riddlesCategoriesRepository;
         }
 
-        public IEnumerable<RiddlesCategoriesModel> GetAll()
-        {
-            var riddlesCategories = this.riddlesCategoriesRepository
+        public IEnumerable<T> GetAll<T>()
+            => this.riddlesCategoriesRepository
                 .All()
-                .Select(rc => new RiddlesCategoriesModel()
-                {
-                    Id = rc.Id,
-                    Name = rc.Name,
-                })
+                .To<T>()
                 .ToList();
-
-            return riddlesCategories;
-        }
     }
 }

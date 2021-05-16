@@ -8,6 +8,7 @@ namespace ViceIO.Web.Controllers
 {
     public class HomeController : Controller
     {
+        [HttpGet]
         [DefaultBreadcrumb("Home")]
         public IActionResult Index()
         {
@@ -19,17 +20,14 @@ namespace ViceIO.Web.Controllers
             return this.Redirect("/Identity/Account/Login");
         }
 
+        [HttpGet]
         [Breadcrumb("Privacy")]
         public IActionResult Privacy()
-        {
-            return this.View();
-        }
+            => this.View();
 
+        [HttpGet]
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
-        {
-            return this.View(
-                new ErrorViewModel { RequestId = Activity.Current?.Id ?? this.HttpContext.TraceIdentifier });
-        }
+            => this.View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? this.HttpContext.TraceIdentifier });
     }
 }

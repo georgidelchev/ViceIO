@@ -38,13 +38,9 @@ namespace ViceIO.Services.Services
         }
 
         public double GetAverageVotes(int viceId)
-        {
-            var averageVotes = this.vicesVotesRepository
+            => this.vicesVotesRepository
                 .All()
                 .Where(vv => vv.ViceId == viceId)
                 .Average(v => v.Value);
-
-            return averageVotes;
-        }
     }
 }

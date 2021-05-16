@@ -1,6 +1,9 @@
-﻿namespace ViceIO.Web.ViewModels.Vices
+﻿using ViceIO.Data.Models;
+using ViceIO.Services.Mapping;
+
+namespace ViceIO.Web.ViewModels.Vices
 {
-    public class GetAllVicesViewModel
+    public class GetAllVicesViewModel : IMapFrom<Vice>
     {
         public int Id { get; set; }
 

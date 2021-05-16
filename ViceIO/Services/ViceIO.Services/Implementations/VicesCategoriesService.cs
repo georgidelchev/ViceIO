@@ -3,7 +3,7 @@ using System.Linq;
 
 using ViceIO.Data.Common.Repositories;
 using ViceIO.Data.Models;
-using ViceIO.Web.ViewModels.VicesCategories;
+using ViceIO.Services.Mapping;
 
 namespace ViceIO.Services.Services
 {
@@ -17,18 +17,10 @@ namespace ViceIO.Services.Services
             this.vicesCategoriesRepository = vicesCategoriesRepository;
         }
 
-        public IEnumerable<VicesCategoriesModel> GetAll()
-        {
-            var vicesCategories = this.vicesCategoriesRepository
+        public IEnumerable<T> GetAll<T>()
+            => this.vicesCategoriesRepository
                 .All()
-                .Select(vc => new VicesCategoriesModel
-                {
-                    Id = vc.Id,
-                    Name = vc.Name,
-                })
+                .To<T>()
                 .ToList();
-
-            return vicesCategories;
-        }
     }
 }

@@ -2,7 +2,7 @@
 
 using ViceIO.Web.ViewModels.Feedback;
 
-namespace ViceIO.Services
+namespace ViceIO.Services.Contracts
 {
     public interface IFeedbackService
     {

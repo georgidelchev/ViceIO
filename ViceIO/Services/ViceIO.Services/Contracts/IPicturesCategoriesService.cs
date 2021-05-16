@@ -1,11 +1,9 @@
 ﻿using System.Collections.Generic;
 
-using ViceIO.Web.ViewModels.PicturesCategories;
-
-namespace ViceIO.Services
+namespace ViceIO.Services.Contracts
 {
     public interface IPicturesCategoriesService
     {
-        IEnumerable<PicturesCategoriesModel> GetAll();
+        IEnumerable<Т> GetAll<Т>();
     }
 }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using ViceIO.Common;
 using ViceIO.Data.Common.Repositories;
 using ViceIO.Data.Models;
+using ViceIO.Services.Mapping;
 using ViceIO.Web.ViewModels.Riddles;
 
 namespace ViceIO.Services
@@ -37,74 +38,30 @@ namespace ViceIO.Services
             await this.riddlesRepository.SaveChangesAsync();
         }
 
-        public IEnumerable<GetAllRiddlesViewModel> GetAll()
-        {
-            var riddles = this.riddlesRepository
+        public IEnumerable<T> GetAll<T>()
+            => this.riddlesRepository
                 .All()
-                .Select(r => new GetAllRiddlesViewModel()
-                {
-                    AddedByUserEmail = r.AddedByUser.Email,
-                    CategoryName = r.Category.Name,
-                    Content = r.Content,
-                    Answer = r.Answer,
-                    CreatedOn = r.CreatedOn,
-                    Id = r.Id,
-                    AddedByUserId = r.AddedByUserId,
-                    AverageVote = r.RiddleVotes.Count == 0 ? 0 : r.RiddleVotes.Average(vv => vv.Value),
-                })
+                .To<T>()
                 .ToList();
 
-            return riddles;
-        }
-
-        public GetRiddleBaseViewModel GetRandom()
-        {
-            var randomRiddle = this.riddlesRepository
+        public T GetRandom<T>()
+            => this.riddlesRepository
                 .All()
                 .OrderBy(r => Guid.NewGuid())
-                .Skip(this.random.Next(GlobalConstants.GetRandomStartingIndex, this.riddlesRepository.All().Count()))
-                .Select(r => new GetRiddleBaseViewModel()
-                {
-                    AddedByUserEmail = r.AddedByUser.Email,
-                    CategoryName = r.Category.Name,
-                    Content = r.Content,
-                    Answer = r.Answer,
-                    CreatedOn = r.CreatedOn,
-                    Id = r.Id,
-                    AddedByUserId = r.AddedByUserId,
-                })
+                .Skip(this.random.Next(GlobalConstants.GetRandomStartingIndex, this.GetCount()))
+                .To<T>()
                 .FirstOrDefault();
 
-            return randomRiddle;
-        }
-
         public int GetCount()
-        {
-            var riddlesCount = this.riddlesRepository
+            => this.riddlesRepository
                 .All()
                 .Count();
 
-            return riddlesCount;
-        }
-
-        public GetRiddleBaseViewModel GetById(int riddleId)
-        {
-            var riddle = this.riddlesRepository
+        public T GetById<T>(int riddleId)
+            => this.riddlesRepository
                 .All()
                 .Where(r => r.Id == riddleId)
-                .Select(r => new GetRiddleBaseViewModel()
-                {
-                    AddedByUserEmail = r.AddedByUser.Email,
-                    CategoryName = r.Category.Name,
-                    Content = r.Content,
-                    Answer = r.Answer,
-                    CreatedOn = r.CreatedOn,
-                    Id = r.Id,
-                    AddedByUserId = r.AddedByUserId,
-                })
+                .To<T>()
                 .FirstOrDefault();
-
-            return riddle;
-        }
     }
 }

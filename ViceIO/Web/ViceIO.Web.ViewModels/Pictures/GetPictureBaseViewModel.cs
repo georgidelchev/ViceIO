@@ -1,14 +1,14 @@
 ﻿using System;
+using ViceIO.Data.Models;
+using ViceIO.Services.Mapping;
 
 namespace ViceIO.Web.ViewModels.Pictures
 {
-    public class GetPictureBaseViewModel
+    public class GetPictureBaseViewModel:IMapFrom<Picture>
     {
         public int Id { get; set; }
 
         public string Name { get; set; }
-
-        public string Url { get; set; }
 
         public string SourceUrl { get; set; }
 

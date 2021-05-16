@@ -1,10 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+
+using AutoMapper;
+using ViceIO.Data.Models;
+using ViceIO.Services.Mapping;
 
 namespace ViceIO.Web.ViewModels.Riddles
 {
-   public class GetRiddleBaseViewModel
+    public class GetRiddleBaseViewModel : IMapFrom<Riddle>
     {
         public int Id { get; set; }
 
@@ -19,7 +21,8 @@ namespace ViceIO.Web.ViewModels.Riddles
         public DateTime CreatedOn { get; set; }
 
         public string CreatedOnAsString
-            => this.CreatedOn.ToShortDateString();
+            => this.CreatedOn
+                .ToShortDateString();
 
         public string AddedByUserId { get; set; }
     }

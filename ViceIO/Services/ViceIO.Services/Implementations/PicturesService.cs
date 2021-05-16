@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using ViceIO.Common;
 using ViceIO.Data.Common.Repositories;
 using ViceIO.Data.Models;
+using ViceIO.Services.Mapping;
 using ViceIO.Web.ViewModels.Pictures;
 
 namespace ViceIO.Services.Services
@@ -59,90 +60,39 @@ namespace ViceIO.Services.Services
             await input.Picture.CopyToAsync(fileStream);
         }
 
-        public IEnumerable<AllPicturesViewModel> GetAll(int page, int itemsPerPage)
-        {
-            var pictures = this.picturesRepository
+        public IEnumerable<T> GetAll<T>(int page, int itemsPerPage)
+            => this.picturesRepository
                 .All()
-                .Select(p => new AllPicturesViewModel()
-                {
-                    Id = p.Id,
-                    Extension = p.Extension,
-                })
+                .To<T>()
                 .Skip((page - 1) * itemsPerPage)
                 .Take(itemsPerPage)
                 .ToList();
 
-            return pictures;
-        }
-
-        public GetPictureBaseViewModel GetRandom()
-        {
-            var randomPicture = this.picturesRepository
+        public T GetRandom<T>()
+            => this.picturesRepository
                 .All()
                 .OrderBy(p => Guid.NewGuid())
-                .Skip(this.random.Next(GlobalConstants.GetRandomStartingIndex, this.picturesRepository.All().Count()))
-                .Select(p => new GetPictureBaseViewModel()
-                {
-                    AddedByUserEmail = p.AddedByUser.Email,
-                    CategoryName = p.Category.Name,
-                    SourceUrl = p.SourceUrl,
-                    CreatedOn = p.CreatedOn,
-                    Id = p.Id,
-                    AddedByUserId = p.AddedByUserId,
-                    Extension = p.Extension,
-                })
+                .Skip(this.random.Next(GlobalConstants.GetRandomStartingIndex, this.GetCount()))
+                .To<T>()
                 .FirstOrDefault();
 
-            return randomPicture;
-        }
-
         public int GetCount()
-        {
-            var picturesCount = this.picturesRepository
+            => this.picturesRepository
                 .All()
                 .Count();
 
-            return picturesCount;
-        }
-
-        public GetPictureBaseViewModel GetById(int pictureId)
-        {
-            var picture = this.picturesRepository
+        public T GetById<T>(int pictureId)
+            => this.picturesRepository
                 .All()
                 .Where(p => p.Id == pictureId)
-                .Select(p => new GetPictureBaseViewModel()
-                {
-                    AddedByUserEmail = p.AddedByUser.Email,
-                    CategoryName = p.Category.Name,
-                    SourceUrl = p.SourceUrl,
-                    CreatedOn = p.CreatedOn,
-                    Id = p.Id,
-                    AddedByUserId = p.AddedByUserId,
-                })
+                .To<T>()
                 .FirstOrDefault();
 
-            return picture;
-        }
-
-        public GetPictureDetailsViewModel Details(int pictureId)
-        {
-            var pictureDetails = this.picturesRepository
+        public T Details<T>(int pictureId)
+            => this.picturesRepository
                 .All()
                 .Where(p => p.Id == pictureId)
-                .Select(p => new GetPictureDetailsViewModel()
-                {
-                    AddedByUserEmail = p.AddedByUser.Email,
-                    AverageVote = p.PictureVotes.Count == 0 ? 0 : p.PictureVotes.Average(pic => pic.Value),
-                    CategoryName = p.Category.Name,
-                    CreatedOn = p.CreatedOn,
-                    Name = p.Name,
-                    Id = p.Id,
-                    AddedByUserId = p.AddedByUserId,
-                    Extension = p.Extension,
-                })
+                .To<T>()
                 .FirstOrDefault();
-
-            return pictureDetails;
-        }
     }
 }

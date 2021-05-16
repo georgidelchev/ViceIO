@@ -6,6 +6,6 @@ namespace ViceIO.Services
 {
     public interface IVicesCategoriesService
     {
-        IEnumerable<VicesCategoriesModel> GetAll();
+        IEnumerable<T> GetAll<T>();
     }
 }

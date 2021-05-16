@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ViceIO.Services;
 using ViceIO.Web.ViewModels.Vices;
+using ViceIO.Web.ViewModels.VicesCategories;
 
 namespace ViceIO.Web.Controllers
 {
@@ -12,7 +13,9 @@ namespace ViceIO.Web.Controllers
         private readonly IVicesService vicesService;
         private readonly IVicesCategoriesService vicesCategoriesService;
 
-        public VicesController(IVicesService vicesService, IVicesCategoriesService vicesCategoriesService)
+        public VicesController(
+            IVicesService vicesService,
+            IVicesCategoriesService vicesCategoriesService)
         {
             this.vicesService = vicesService;
             this.vicesCategoriesService = vicesCategoriesService;
@@ -28,7 +31,7 @@ namespace ViceIO.Web.Controllers
 
             var viewModel = new AllVicesListViewModel()
             {
-                Vices = this.vicesService.GetAll(id, 12),
+                Vices = this.vicesService.GetAll<GetAllVicesViewModel>(id, 12),
                 ItemsPerPage = 12,
                 PageNumber = id,
                 Count = this.vicesService.GetCount(),
@@ -42,7 +45,7 @@ namespace ViceIO.Web.Controllers
         {
             var viewModel = new CreateViceInputModel
             {
-                Categories = this.vicesCategoriesService.GetAll(),
+                Categories = this.vicesCategoriesService.GetAll<VicesCategoriesModel>(),
             };
 
             return this.View(viewModel);
@@ -71,7 +74,7 @@ namespace ViceIO.Web.Controllers
                 return this.View("Error");
             }
 
-            var viewModel = this.vicesService.GetRandom();
+            var viewModel = this.vicesService.GetRandom<GetRandomViceViewModel>();
 
             return this.View(viewModel);
         }

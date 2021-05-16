@@ -5,7 +5,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using SmartBreadcrumbs.Attributes;
 using ViceIO.Services;
+using ViceIO.Services.Contracts;
 using ViceIO.Web.ViewModels.Pictures;
+using ViceIO.Web.ViewModels.PicturesCategories;
 
 namespace ViceIO.Web.Controllers
 {
@@ -37,7 +39,7 @@ namespace ViceIO.Web.Controllers
 
             var viewModel = new PicturesListViewModel()
             {
-                Pictures = this.picturesService.GetAll(id, 12),
+                Pictures = this.picturesService.GetAll<AllPicturesViewModel>(id, 12),
                 ItemsPerPage = 12,
                 PageNumber = id,
                 Count = this.picturesService.GetCount(),
@@ -53,7 +55,7 @@ namespace ViceIO.Web.Controllers
             var viewModel = new CreatePictureInputModel()
             {
                 Categories = this.picturesCategoriesService
-                    .GetAll(),
+                    .GetAll<PicturesCategoriesModel>(),
             };
 
             return this.View(viewModel);
@@ -96,16 +98,17 @@ namespace ViceIO.Web.Controllers
                 return this.View("Error");
             }
 
-            var viewModel = this.picturesService.GetRandom();
+            var viewModel = this.picturesService.GetRandom<GetPictureBaseViewModel>();
 
             return this.View(viewModel);
         }
 
+        [HttpGet]
         [Breadcrumb("Details", FromAction = "All", FromController = typeof(PicturesController))]
         public IActionResult Details(int id)
         {
             var viewModel = this.picturesService
-                .Details(id);
+                .Details<GetPictureDetailsViewModel>(id);
 
             return this.View(viewModel);
         }

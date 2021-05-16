@@ -9,12 +9,12 @@ namespace ViceIO.Services
     {
         Task CreateAsync(CreateRiddleInputModel input, string userId);
 
-        IEnumerable<GetAllRiddlesViewModel> GetAll();
+        IEnumerable<T> GetAll<T>();
 
-        GetRiddleBaseViewModel GetRandom();
+        T GetRandom<T>();
 
         int GetCount();
 
-        GetRiddleBaseViewModel GetById(int pictureId);
+        T GetById<T>(int pictureId);
     }
 }

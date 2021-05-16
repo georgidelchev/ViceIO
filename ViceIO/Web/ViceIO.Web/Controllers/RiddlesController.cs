@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ViceIO.Services;
 using ViceIO.Web.ViewModels.Riddles;
+using ViceIO.Web.ViewModels.RiddlesCategories;
 
 namespace ViceIO.Web.Controllers
 {
@@ -12,7 +13,9 @@ namespace ViceIO.Web.Controllers
         private readonly IRiddlesService riddlesService;
         private readonly IRiddlesCategoriesService riddlesCategoriesService;
 
-        public RiddlesController(IRiddlesService riddlesService, IRiddlesCategoriesService riddlesCategoriesService)
+        public RiddlesController(
+            IRiddlesService riddlesService,
+            IRiddlesCategoriesService riddlesCategoriesService)
         {
             this.riddlesService = riddlesService;
             this.riddlesCategoriesService = riddlesCategoriesService;
@@ -23,7 +26,7 @@ namespace ViceIO.Web.Controllers
         {
             var viewModel = new RiddlesListViewModel()
             {
-                Riddles = this.riddlesService.GetAll(),
+                Riddles = this.riddlesService.GetAll<GetAllRiddlesViewModel>(),
             };
 
             return this.View(viewModel);
@@ -34,7 +37,7 @@ namespace ViceIO.Web.Controllers
         {
             var viewModel = new CreateRiddleInputModel()
             {
-                Categories = this.riddlesCategoriesService.GetAll(),
+                Categories = this.riddlesCategoriesService.GetAll<RiddlesCategoriesModel>(),
             };
 
             return this.View(viewModel);
@@ -58,7 +61,7 @@ namespace ViceIO.Web.Controllers
         [HttpGet]
         public IActionResult Random()
         {
-            var viewModel = this.riddlesService.GetRandom();
+            var viewModel = this.riddlesService.GetRandom<GetRiddleBaseViewModel>();
 
             return this.View(viewModel);
         }

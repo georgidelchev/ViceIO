@@ -17,6 +17,8 @@ using ViceIO.Data.Models;
 using ViceIO.Data.Repositories;
 using ViceIO.Data.Seeding;
 using ViceIO.Services;
+using ViceIO.Services.Contracts;
+using ViceIO.Services.Implementations;
 using ViceIO.Services.Mapping;
 using ViceIO.Services.Messaging;
 using ViceIO.Services.Services;
@@ -94,6 +96,8 @@ namespace ViceIO.Web
             services.AddTransient<IViceVotesService, ViceVotesService>();
             services.AddTransient<IPictureVotesService, PictureVotesService>();
             services.AddTransient<IFeedbackService, FeedbackService>();
+            services.AddTransient<IRiddlesService, RiddlesService>();
+            services.AddTransient<IRiddlesCategoriesService, RiddlesCategoriesService>();
 
             // Random service
             services.AddTransient<Random>();

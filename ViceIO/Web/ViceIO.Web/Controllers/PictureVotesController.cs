@@ -15,7 +15,8 @@ namespace ViceIO.Web.Controllers
     {
         private readonly IPictureVotesService picturesVotesService;
 
-        public PictureVotesController(IPictureVotesService picturesVotesService)
+        public PictureVotesController(
+            IPictureVotesService picturesVotesService)
         {
             this.picturesVotesService = picturesVotesService;
         }

@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SmartBreadcrumbs.Attributes;
 using ViceIO.Data.Models;
-using ViceIO.Services;
+using ViceIO.Services.Contracts;
 using ViceIO.Web.ViewModels.Feedback;
 
 namespace ViceIO.Web.Controllers
@@ -39,8 +39,8 @@ namespace ViceIO.Web.Controllers
             return this.View(viewModel);
         }
 
-        [Authorize]
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Create(CreateFeedbackInputModel input)
         {
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
