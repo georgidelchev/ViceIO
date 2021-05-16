@@ -16,22 +16,35 @@
     <hr />
     <div asp-validation-summary="All" class="text-danger"></div>
 
-    <div class="form-group">
-        <label asp-for="Name"></label>
-        <input asp-for="Name" rows="5" class="form-control" />
+    <div>
         <span asp-validation-for="Name" class="text-danger"></span>
-    </div>
 
-    <div class="form-group">
-        <label asp-for="CategoryId"></label>
-        <select asp-for="CategoryId" asp-items="categories" class="form-control"></select>
-        <span asp-validation-for="CategoryId" class="text-danger"></span>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <label asp-for="Name" class="input-group-text">
+                    <i class="fas fa-signature"></i>
+                </label>
+            </div>
+            <input asp-for="Name" rows="10" placeholder="Name" class="form-control" />
+        </div>
     </div>
+    <div>
+        <span asp-validation-for="Name" class="text-danger"></span>
+        <div class="text-center">Category</div>
 
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <label asp-for="CategoryId" class="input-group-text">
+                    <i class="fas fa-list-ol"></i>
+                </label>
+            </div>
+            <select asp-for="CategoryId" asp-items="categories" class="form-control"></select>
+        </div>
+    </div>
     <div class="form-group">
         <label for="customFile">Upload Picture</label>
         <input type="file" class="form-control-file" id="customFile" asp-for="Picture" />
-        <span  asp-validation-for="Picture" class="text-danger"></span>
+        <span asp-validation-for="Picture" class="text-danger"></span>
     </div>
 
     <button type="submit" class="btn btn-success">Submit</button>

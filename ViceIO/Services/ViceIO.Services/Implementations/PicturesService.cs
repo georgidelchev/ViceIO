@@ -95,7 +95,7 @@ namespace ViceIO.Services.Services
                 .To<T>()
                 .FirstOrDefault();
 
-        public IEnumerable<T> Get12MostPopular<T>()
+        public IEnumerable<T> Get12TopRated<T>()
             => this.picturesRepository
                 .All()
                 .OrderByDescending(p => p.PictureVotes.Average(pv => pv.Value))

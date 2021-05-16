@@ -113,11 +113,11 @@ namespace ViceIO.Web.Controllers
             return this.View(viewModel);
         }
 
-        public IActionResult MostPopular()
+        public IActionResult TopRated()
         {
             var viewModel = new PicturesListViewModel()
-            {
-                Pictures = this.picturesService.Get12MostPopular<AllPicturesViewModel>(),
+            { 
+                Pictures = this.picturesService.Get12TopRated<AllPicturesViewModel>(),
             };
 
             return this.View(viewModel);
