@@ -7,6 +7,8 @@ namespace ViceIO.Web.ViewModels.Vices
 {
     public class CreateViceInputModel
     {
+        [Required]
+        [MaxLength(2000)]
         public string Content { get; set; }
 
         [Display(Name = "Category")]

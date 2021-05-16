@@ -99,6 +99,16 @@ namespace ViceIO.Services.Services
             => this.picturesRepository
                 .All()
                 .OrderByDescending(p => p.PictureVotes.Average(pv => pv.Value))
+                .ThenBy(p => p.Name)
+                .To<T>()
+                .Take(12)
+                .ToList();
+
+        public IEnumerable<T> Get12Recent<T>()
+            => this.picturesRepository
+                .All()
+                .OrderByDescending(p => p.CreatedOn)
+                .ThenBy(p => p.Name)
                 .To<T>()
                 .Take(12)
                 .ToList();

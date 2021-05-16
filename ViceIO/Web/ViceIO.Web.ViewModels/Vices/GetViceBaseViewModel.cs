@@ -1,8 +1,11 @@
 ﻿using System;
 
+using ViceIO.Data.Models;
+using ViceIO.Services.Mapping;
+
 namespace ViceIO.Web.ViewModels.Vices
 {
-    public class GetViceBaseViewModel
+    public class GetViceBaseViewModel : IMapFrom<Vice>
     {
         public int Id { get; set; }
 

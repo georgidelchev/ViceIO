@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Mvc;
+using SmartBreadcrumbs.Attributes;
 using ViceIO.Services;
 using ViceIO.Web.ViewModels.Vices;
 using ViceIO.Web.ViewModels.VicesCategories;
@@ -22,6 +23,7 @@ namespace ViceIO.Web.Controllers
         }
 
         [HttpGet]
+        [Breadcrumb("All Vices", FromAction = "Index", FromController = typeof(HomeController))]
         public IActionResult All(int id = 1)
         {
             if (id <= 0)
@@ -31,8 +33,8 @@ namespace ViceIO.Web.Controllers
 
             var viewModel = new AllVicesListViewModel()
             {
-                Vices = this.vicesService.GetAll<GetAllVicesViewModel>(id, 12),
-                ItemsPerPage = 12,
+                Vices = this.vicesService.GetAll<GetAllVicesViewModel>(id, 24),
+                ItemsPerPage = 24,
                 PageNumber = id,
                 Count = this.vicesService.GetCount(),
             };
@@ -41,6 +43,7 @@ namespace ViceIO.Web.Controllers
         }
 
         [HttpGet]
+        [Breadcrumb("Create Vice", FromAction = "Index", FromController = typeof(HomeController))]
         public IActionResult Create()
         {
             var viewModel = new CreateViceInputModel
@@ -67,6 +70,7 @@ namespace ViceIO.Web.Controllers
         }
 
         [HttpGet]
+        [Breadcrumb("Random Vice", FromAction = "Index", FromController = typeof(HomeController))]
         public IActionResult Random()
         {
             if (this.vicesService.GetCount() == 0)
@@ -80,9 +84,12 @@ namespace ViceIO.Web.Controllers
         }
 
         [HttpGet]
+        [Breadcrumb("Vice Details", FromAction = "All", FromController = typeof(VicesController))]
         public IActionResult Details(int id)
         {
-            return this.View();
+            var viewModel = this.vicesService.GetDetails<GetViceDetailsViewModel>(id);
+
+            return this.View(viewModel);
         }
     }
 }

@@ -113,11 +113,23 @@ namespace ViceIO.Web.Controllers
             return this.View(viewModel);
         }
 
+        [HttpGet]
+        [Breadcrumb("Top rated pictures", FromAction = "Index", FromController = typeof(HomeController))]
         public IActionResult TopRated()
         {
             var viewModel = new PicturesListViewModel()
-            { 
+            {
                 Pictures = this.picturesService.Get12TopRated<AllPicturesViewModel>(),
+            };
+
+            return this.View(viewModel);
+        }
+
+        public IActionResult Recent()
+        {
+            var viewModel = new PicturesListViewModel()
+            {
+                Pictures = this.picturesService.Get12Recent<AllPicturesViewModel>(),
             };
 
             return this.View(viewModel);

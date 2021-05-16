@@ -19,9 +19,7 @@ namespace ViceIO.Web.ViewModels.Feedback
         public string Content { get; set; }
 
         [Required]
+        [EmailAddress]
         public string Email { get; set; }
-
-        [Required]
-        public string UserId { get; set; }
     }
 }

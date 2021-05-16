@@ -9,63 +9,21 @@
 <script src="~/lib/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>
 <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js" asp-append-version="true"></script>
 
-<div class="table-responsive">
-    <table>
-        @{ var counter = 1; }
-        <tr>
-            @foreach (var vice in this.Model.Vices)
-            {
-                <td>
-                    <hr />
-                    <div class="bs-example d-flex justify-content-center">
-                        <div class="card" style="width: 210px;">
-                            <div class="card-body text-center">
-                                <p>
-                                    @vice.ShortName@if (vice.Content.Length > 15)
-                                    {<text>...</text>}
-                                </p>
-                                <a class="btn btn-info btn-sm" asp-controller="Vices" asp-action="Details" asp-route-id="@vice.Id">Read More</a>
-                                <hr />
-                            </div>
-                        </div>
-                    </div>
-                </td>
-                if (counter % 4 == 0)
-                {
-                @:</tr>
-                @:<tr>
-                }
-
-                counter++;
-            }
-        </tr>
-    </table>
+<hr />
+<div class="row">
+    @foreach (var vice in this.Model.Vices)
+    {
+        <div class="card col-md-4 bg-light">
+            <div class="card-body text-center font-weight-bold">
+                @vice.ShortName@if (vice.Content.Length > 15)
+                {<text>...</text>}
+                <div>
+                    <a class="btn btn-info btn-sm" asp-controller="Vices" asp-action="Details" asp-route-id="@vice.Id">Read More</a>
+                </div>
+            </div>
+        </div>
+    }
 </div>
+<hr />
 
 <partial name="_PagingPartial" model="@Model" />
-
-<form method="post" id="antiForgeryForm"></form>
-<script>
-    $("span[data-vote]").each(function (el) {
-        $(this).click(function () {
-            var value = $(this).attr("data-vote");
-            console.log(value);
-            var viceId = $(this).attr("id");
-            console.log(viceId);
-            var antiForgeryToken = $('#antiForgeryForm input[name=__RequestVerificationToken]').val();
-            var data = { viceId: viceId, value: value };
-            $.ajax({
-                type: "POST",
-                url: "/api/ViceVotes",
-                data: JSON.stringify(data),
-                headers: {
-                    'X-CSRF-TOKEN': antiForgeryToken
-                },
-                success: function (data) {
-                    $('#averageVoteValue').html(data.averageVote % 1 == 0 ? data.averageVote : data.averageVote.toFixed(1));
-                },
-                contentType: 'application/json',
-            });
-        });
-    });
-</script>

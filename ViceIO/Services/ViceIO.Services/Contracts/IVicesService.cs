@@ -15,6 +15,6 @@ namespace ViceIO.Services
 
         int GetCount();
 
-        T GetById<T>(int viceId);
+        T GetDetails<T>(int viceId);
     }
 }

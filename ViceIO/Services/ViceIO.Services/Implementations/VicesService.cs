@@ -58,7 +58,7 @@ namespace ViceIO.Services
                 .All()
                 .Count();
 
-        public T GetById<T>(int viceId)
+        public T GetDetails<T>(int viceId)
             => this.vicesRepository
                 .All()
                 .Where(v => v.Id == viceId)
