@@ -18,5 +18,7 @@ namespace ViceIO.Services
         T GetById<T>(int pictureId);
 
         T Details<T>(int pictureId);
+
+        IEnumerable<T> Get12MostPopular<T>();
     }
 }

@@ -1,0 +1,39 @@
+﻿@model ViceIO.Web.ViewModels.Pictures.PicturesListViewModel
+
+@{
+    this.ViewData["Title"] = "Our most popular pictures.";
+}
+
+<h1 class="text-center">Hello, @User.Identity?.Name</h1>
+<h2 class="text-center">@this.ViewData["Title"]</h2>
+
+<div class="table-responsive">
+    <table>
+        @{ var counter = 1; }
+        <tr>
+            @foreach (var picture in this.Model.Pictures)
+            {
+                <td>
+                    <hr />
+                    <div class="bs-example">
+                        <div class="card" style="width: 230px;">
+                            <img src="/system_images/Pictures/@picture.Id.@picture.Extension" class="card-img-top" width="360" height="300">
+                            <div class="card-body text-center">
+                                <a class="btn btn-info btn-sm" asp-controller="Pictures" asp-action="Details" asp-route-id="@picture.Id">Details</a>
+                                <hr />
+                            </div>
+                        </div>
+                    </div>
+                </td>
+                if (counter % 4 == 0)
+                {
+                @:</tr>
+                @:<tr>
+                }
+
+                counter++;
+            }
+        </tr>
+    </table>
+</div>
+<hr />

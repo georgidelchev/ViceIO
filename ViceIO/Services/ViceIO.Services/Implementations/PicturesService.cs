@@ -94,5 +94,13 @@ namespace ViceIO.Services.Services
                 .Where(p => p.Id == pictureId)
                 .To<T>()
                 .FirstOrDefault();
+
+        public IEnumerable<T> Get12MostPopular<T>()
+            => this.picturesRepository
+                .All()
+                .OrderByDescending(p => p.PictureVotes.Average(pv => pv.Value))
+                .To<T>()
+                .Take(12)
+                .ToList();
     }
 }

@@ -112,5 +112,15 @@ namespace ViceIO.Web.Controllers
 
             return this.View(viewModel);
         }
+
+        public IActionResult MostPopular()
+        {
+            var viewModel = new PicturesListViewModel()
+            {
+                Pictures = this.picturesService.Get12MostPopular<AllPicturesViewModel>(),
+            };
+
+            return this.View(viewModel);
+        }
     }
 }
