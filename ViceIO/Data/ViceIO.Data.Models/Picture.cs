@@ -19,14 +19,14 @@ namespace ViceIO.Data.Models
         [Required]
         public int CategoryId { get; set; }
 
-        public PictureCategory Category { get; set; }
+        public virtual PictureCategory Category { get; set; }
 
         [Required]
         public string AddedByUserId { get; set; }
 
         public virtual ApplicationUser AddedByUser { get; set; }
 
-        public ICollection<PictureVote> PictureVotes { get; set; }
+        public virtual ICollection<PictureVote> PictureVotes { get; set; }
             = new HashSet<PictureVote>();
     }
 }

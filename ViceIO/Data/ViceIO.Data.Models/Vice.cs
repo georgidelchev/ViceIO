@@ -21,7 +21,7 @@ namespace ViceIO.Data.Models
 
         public virtual ApplicationUser AddedByUser { get; set; }
 
-        public ICollection<ViceVote> ViceVotes { get; set; }
+        public virtual ICollection<ViceVote> ViceVotes { get; set; }
             = new HashSet<ViceVote>();
     }
 }

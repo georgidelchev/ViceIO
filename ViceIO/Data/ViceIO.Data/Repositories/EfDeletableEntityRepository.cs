@@ -16,20 +16,16 @@ namespace ViceIO.Data.Repositories
         }
 
         public override IQueryable<TEntity> All()
-            => base.All()
-                .Where(x => !x.IsDeleted);
+            => base.All().Where(x => !x.IsDeleted);
 
         public override IQueryable<TEntity> AllAsNoTracking()
-            => base.AllAsNoTracking()
-                .Where(x => !x.IsDeleted);
+            => base.AllAsNoTracking().Where(x => !x.IsDeleted);
 
         public IQueryable<TEntity> AllWithDeleted()
-            => base.All()
-                .IgnoreQueryFilters();
+            => base.All().IgnoreQueryFilters();
 
         public IQueryable<TEntity> AllAsNoTrackingWithDeleted()
-            => base.AllAsNoTracking()
-                .IgnoreQueryFilters();
+            => base.AllAsNoTracking().IgnoreQueryFilters();
 
         public void HardDelete(TEntity entity)
             => base.Delete(entity);
